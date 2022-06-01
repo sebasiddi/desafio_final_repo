@@ -1,0 +1,36 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<h2>Resultado de la búsqueda</h2>
+
+{% if noticias %}
+<div id="comments">
+<ul class="commentlist">
+    {% for n in noticias %}
+        <li class="comment_odd">
+            <div class="author">
+                <span class="name">
+                    
+                    Título: {{n.titulo}}
+                </span>
+            </div>
+           
+        Bajada: {{n.bajada}}
+        <br>
+        <strong>Sección:{{n.seccion}} </strong>
+    </li>
+        
+        <br>
+    {% endfor %}
+</ul>
+</div>
+{% else %}
+    <p>No se encontraron noticias</p>
+
+{% endif %}
+
+
+{% endblock %}

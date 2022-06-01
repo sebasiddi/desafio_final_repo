@@ -1,0 +1,39 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<h1>Política</h1>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Bajada</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for n in noticias %}
+       {% if n.seccion == "politica" %}
+        <tr>
+            <td>{{n.titulo}}</td>
+            <td>{{n.bajada}}</td>
+        </tr>
+       {% endif %} 
+      {% endfor %}
+    </tbody>
+  </table>
+
+<!--
+  {% for n in noticias %}
+  {% if n.seccion == "politica" %}
+       
+        <h2>{{n.titulo}}</h2>
+        <h4>{{n.bajada}}</h4>
+   
+  {% endif %} 
+ {% endfor %}
+ -->
+{% endblock %}

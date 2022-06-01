@@ -1,0 +1,51 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<script>
+
+function countChars(obj){
+    document.getElementById("charNum").innerHTML = obj.value.length+' caracteres (max 140)';
+}
+function countCharsBajada(obj){
+    document.getElementById("charNum2").innerHTML = obj.value.length+' caracteres (max 10 mil';
+}
+
+</script>
+
+<div class="wrapper">
+    <div id="hpage_cats">
+        <h1>Ingresar nueva publicación</h1>
+<form action="nueva_publicacion" method="POST">
+    {% csrf_token %}
+    <h3>Sección</h3><h4><i>politica/economia/sociedad/deportes</i></h4>
+    <input type="text" name="seccion" required>
+    <br>
+    <br>
+    <h3>Título</h3>
+    <td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>
+    <td><h5 id="charNum">0 caractéres</h5> </td>
+    <br>
+    <h3>Bajada</h3>
+    <br>
+    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" placeholder="Bajada hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
+    <td><h5 id="charNum2">0 caractéres</h5> </td>
+    <br>
+    <br>
+    Nombre:
+    <input type="text" size="100" name="periodistxs" required>
+    <br>
+    <br>
+    E-mail:
+    <input type="email" size="100"  name="email_preiodistxs" required>
+    <br>
+    <br>
+    <input type="submit" value="Enviar">
+
+    
+</form>
+</div>
+</div>
+
+{% endblock %}
