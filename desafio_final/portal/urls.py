@@ -11,8 +11,8 @@ urlpatterns = [
     path("nueva_publicacion", views.nueva_publicacion ,name="nueva_publicacion"),
     path("resultados", views.resultados ,name="resultados"),
     path("lectura", views.lectura ,name="lectura"),
-    path("formulario" , views.formulario, name="formulario"),
+    path("formulario_periodistxs" , views.formulario_periodistxs, name="formulario_periodistxs"),
     path("formulario_lectorxs" , views.formulario_lectorxs, name="formulario_lectorxs"),
-    path("buscar" , views.buscar, name="buscar"),
+    path("lectura/<id>", views.lectura ,name="lectura"),
 
 ]

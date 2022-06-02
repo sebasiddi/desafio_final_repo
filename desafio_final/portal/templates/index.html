@@ -3,16 +3,40 @@
 {% load static %}
 
 {% block contenido %}
-<h2><marquee behavior="" direction="">{% for n in noticias %}
-[Últimos Títulos] {{n.seccion}}: {{n.titulo}}
+
+<!-- Marquesina con los útimos títulos con secciones corregidas-->
+<h2><marquee behavior="" direction="">
+{% for n in noticias %}
+|Últimos Títulos|  
+  {% if n.seccion == "politica" %}
+    {% with secc="Política" %}
+      {{secc}}: {{n.titulo}}
+    {% endwith %}
+  {% elif n.seccion == "economía" %}
+    {% with secc="Economía" %}
+      {{secc}}: {{n.titulo}}
+    {% endwith %}
+  {% elif n.seccion == "sociedad" %}
+    {% with secc="Sociedad" %}
+      {{secc}}: {{n.titulo}}
+    {% endwith %}
+  {% elif n.seccion == "deportes" %}
+    {% with secc="Deportes" %}
+      {{secc}}: {{n.titulo}}
+    {% endwith %}
+  {% endif %}
 {% endfor %}</marquee></h2>
+
+
 <div class="wrapper">
   <div id="hpage_cats">
     {% for n in noticias %}
       {% if n.home %}
         <h2><a href="{{n.seccion}}">{{n.seccion}} &raquo;</a></h2>
-        <p><strong><a href="#">{{n.titulo}}</a></strong></p>
+        <!-- <p><strong><a href="lectura/{{n.id}}"></a>>{{n.titulo}}</a></strong></p>  Link a noticia indivual WIP-->
+        <p><strong><a href="inicio"></a>{{n.titulo}}</a></strong></p>
         <p>{{n.bajada}}</p>
+
       {% endif %}
     
     {% endfor %}

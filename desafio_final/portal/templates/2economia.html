@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block contenido %}
-
+<div class="wrapper">
+  <div id="hpage_cats">
 <h1>Economía</h1>
 
 <table class="table">
@@ -17,12 +18,13 @@
       {% for n in noticias %}
        {% if n.seccion == "economia" %}
         <tr>
-            <td>{{n.titulo}}</td>
+            <td >{{n.titulo}}</td>
             <td>{{n.bajada}}</td>
         </tr>
        {% endif %} 
       {% endfor %}
     </tbody>
   </table>
-
+</div>
+</div>
 {% endblock %}

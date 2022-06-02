@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block contenido %}
-
+<div class="wrapper">
+  <div id="hpage_cats">
 <h1>Política</h1>
 
 
@@ -25,7 +26,24 @@
       {% endfor %}
     </tbody>
   </table>
-
+</div>
+</div>
+<div class="column">
+<div id="featured">
+  {% for n in noticias %}
+       {% if n.seccion == "politica" %}
+  <ul>
+    <li>
+      <h2>{{n.titulo}}</h2>
+      <p class="imgholder"><img src="../images/demo/240x90.gif" alt="" /></p>
+      <p>{{n.bajada}}</p>
+      <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+    </li>
+  </ul>
+  {% endif %} 
+  {% endfor %}
+</div>
+</div>
 <!--
   {% for n in noticias %}
   {% if n.seccion == "politica" %}

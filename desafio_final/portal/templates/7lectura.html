@@ -4,8 +4,17 @@
 
 {% block contenido %}
 
-<h1>Lectura</h1>
-
-
+<div class="wrapper">
+    <div id="hpage_cats">
+      {% for n in noticias %}
+        {% if n.home %}
+        <h2></h2>
+          <p><strong><a>{{n.titulo}}</a></strong></p>
+          <p>{{n.bajada}}</p>
+        {% endif %}
+      
+      {% endfor %}
+    </div>
+  </div>
 
 {% endblock %}

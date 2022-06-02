@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block contenido %}
-
-<h2>Resultado de la búsqueda</h2>
+<div class="wrapper">
+    <div id="hpage_cats">
+<h2><strong>Resultados de la búsqueda ordenados desde el mas reciente</strong></h2>
 
 {% if noticias %}
 <div id="comments">
@@ -13,7 +14,7 @@
         <li class="comment_odd">
             <div class="author">
                 <span class="name">
-                    
+                    id: {{n.id}} | 
                     Título: {{n.titulo}}
                 </span>
             </div>
@@ -29,7 +30,8 @@
 </div>
 {% else %}
     <p>No se encontraron noticias</p>
-
+</div>
+</div>
 {% endif %}
 
 

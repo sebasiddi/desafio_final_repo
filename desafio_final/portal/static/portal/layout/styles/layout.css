@@ -37,10 +37,10 @@ img{display:block; margin:0; padding:0; border:none;}
 
 /* ----------------------------------------------Wrapper------------------------------------- */
 
-div.wrapper{display:block; width:100%; margin:0; text-align:left; border-bottom:1px solid #E3E3E3;}
-div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{margin:0 0 15px 0; padding:0; font-size:20px; font-weight:normal; line-height:normal;}
+div.wrapper{display:block; width:100%; margin:0; text-align:left; border-bottom:1px solid #88c8fd;}
+div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{margin:0 0 15px 0; padding:0; font-size:22px; font-weight:normal; line-height:normal;}
 .col0, .col0 a{color:#FFFFFF; background-color:#2b728f;}
-.col2{color:#FFFFFF; background-color:#F6F6F6;}
+.col2{color:#FFFFFF; background-color:#90d1fd;}
 
 /* ----------------------------------------------Generalise------------------------------------- */
 
@@ -92,7 +92,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 #comments .commentlist li.comment_even{color:#666666; background-color:#E8E8E8;}
 #comments .commentlist li.comment_even a{color:#059BD8; background-color:#E8E8E8;}
 #comments .commentlist .author .name{font-weight:bold;}
-#comments .commentlist .submitdate{font-size:smaller;}
+#comments .commentlist .submitdate{font-size:small;}
 #comments .commentlist p{margin:10px 5px 10px 0; padding:0; font-weight:normal; text-transform:none;}
 #comments .commentlist li .avatar{float:right; border:1px solid #EEEEEE; margin:0 0 0 10px;}
 
