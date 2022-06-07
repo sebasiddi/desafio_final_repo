@@ -3,36 +3,52 @@
 {% load static %}
 
 {% block contenido %}
+
 <div class="wrapper">
     <div id="hpage_cats">
-<h2><strong>Resultados de la búsqueda ordenados desde el mas reciente</strong></h2>
+      <div class="sticky-top">
+        <div class="text-bg-light p-3">
+          <h1>Resultados de la búsqueda ordenados desde el mas reciente</h1>
+        </div>
+      </div>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          {% for n in noticias %}
+            {% if n.publicado == True %}
+              <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
+                {% if n.seccion == "politica" %}
+                    {% with secc="POLÍTICA" %}
+                    <span class="badge bg-secondary">{{secc}}</span>  | ID: {{n.id}} | Título: {{n.titulo}}
+                    {% endwith %}
+                {% elif n.seccion == "economia" %}
+                    {% with secc="ECONOMÍA" %}
+                    <span class="badge bg-secondary">{{secc}}</span>  | ID: {{n.id}} | Título: {{n.titulo}}
+                    {% endwith %}
+                {% elif n.seccion == "sociedad" %}
+                    {% with secc="SOCIEDAD" %}
+                    <span class="badge bg-secondary">{{secc}}</span> | ID: {{n.id}} | Título: {{n.titulo}}
+                    {% endwith %}
+                {% elif n.seccion == "deportes" %}
+                    {% with secc="DEPORTES" %}
+                    <span class="badge bg-secondary">{{secc}}</span>  | ID: {{n.id}} | Título: {{n.titulo}}
+                    {% endwith %}
+                {% endif %}|
+              </button>
+              </h2>
+              <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">{{n.bajada}}
+                  <br>
+                    <a href="{% url 'lectura' n.id %}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
+                </div>
+              </div>
+            {% endif %} 
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
 
-{% if noticias %}
-<div id="comments">
-<ul class="commentlist">
-    {% for n in noticias %}
-        <li class="comment_odd">
-            <div class="author">
-                <span class="name">
-                    id: {{n.id}} | 
-                    Título: {{n.titulo}}
-                </span>
-            </div>
-           
-        Bajada: {{n.bajada}}
-        <br>
-        <strong>Sección:{{n.seccion}} </strong>
-    </li>
-        
-        <br>
-    {% endfor %}
-</ul>
-</div>
-{% else %}
-    <p>No se encontraron noticias</p>
-</div>
-</div>
-{% endif %}
 
 
 {% endblock %}

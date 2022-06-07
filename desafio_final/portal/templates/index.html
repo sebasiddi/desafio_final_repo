@@ -5,38 +5,39 @@
 {% block contenido %}
 
 <!-- Marquesina con los útimos títulos con secciones corregidas-->
-<h2><marquee behavior="" direction="">
-{% for n in noticias %}
-|Últimos Títulos|  
-  {% if n.seccion == "politica" %}
-    {% with secc="Política" %}
-    <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
-    {% endwith %}
-  {% elif n.seccion == "economia" %}
-    {% with secc="Economía" %}
-      {{secc}}: {{n.titulo}}
-    {% endwith %}
-  {% elif n.seccion == "sociedad" %}
-    {% with secc="Sociedad" %}
-      {{secc}}: {{n.titulo}}
-    {% endwith %}
-  {% elif n.seccion == "deportes" %}
-    {% with secc="Deportes" %}
-      {{secc}}: {{n.titulo}}
-    {% endwith %}
-  {% endif %}
-{% endfor %}</marquee></h2>
+<div class="sticky-top">
+  <div class="text-bg-primary p-1">
+    <h2>
+      <marquee behavior="" direction="">
+        {% for n in noticias %}
+          |Últimos Títulos|  
+          {% if n.seccion == "politica" %}
+            {% with secc="Política" %}
+            <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+            {% endwith %}
+          {% elif n.seccion == "economia" %}
+            {% with secc="Economía" %}
+            <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+            {% endwith %}
+          {% elif n.seccion == "sociedad" %}
+            {% with secc="Sociedad" %}
+            <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+            {% endwith %}
+          {% elif n.seccion == "deportes" %}
+            {% with secc="Deportes" %}
+            <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+            {% endwith %}
+          {% endif %}
+        {% endfor %}
+      </marquee>
+    </h2>
+  </div>
+</div>
 
 
-
-
-
+<!-- DESPLIEGUE DE ACORDEON CON TITULOS -->
 <div class="wrapper">
   <div id="hpage_cats">
-
-
-
-
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         {% for n in noticias %}
@@ -45,39 +46,45 @@
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
             {% if n.seccion == "politica" %}
               {% with secc="POLÍTICA" %}
-              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              <span class="badge bg-secondary">{{secc}}</span>
               {% endwith %}
             {% elif n.seccion == "economia" %}
               {% with secc="ECONOMÍA" %}
-              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              <span class="badge bg-secondary">{{secc}}</span>
               {% endwith %}
             {% elif n.seccion == "sociedad" %}
               {% with secc="SOCIEDAD" %}
-              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              <span class="badge bg-secondary">{{secc}}</span>
               {% endwith %}
             {% elif n.seccion == "deportes" %}
               {% with secc="DEPORTES" %}
-              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              <span class="badge bg-secondary">{{secc}}</span>
               {% endwith %}
-            {% endif %}: {{n.titulo}}
+            {% endif %}
+            | {{n.titulo}}
           </button>
         </h2>
         <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">{{n.bajada}}
+          <div class="accordion-body">
+            <div class="col-100 text-truncate">
+              {{n.bajada}}
+            </div>
             <br>
-         
             <a href="{% url 'lectura' n.id %}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
             <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary"></i> Editar</button></a>
             <a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> Borrar</button></a>
-            
           </div>
         </div>
-      
-      {% endif %} 
-      {% endfor %}
+        {% endif %} 
+        {% endfor %}
       </div>
     </div>
-    
+  </div>
+</div>
+
+
+
+{% endblock %}    
 
 
 <!--
@@ -95,10 +102,3 @@
     {% endfor %}
 
   -->
-
-  </div>
-</div>
-
-
-
-{% endblock %}

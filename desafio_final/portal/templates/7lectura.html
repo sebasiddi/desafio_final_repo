@@ -5,16 +5,41 @@
 {% block contenido %}
 
 <div class="wrapper">
-    <div id="hpage_cats">
-      {% for n in noticias %}
-        {% if n.home %}
-        <h2></h2>
-          <p><strong><a>{{n.titulo}}</a></strong></p>
-          <p>{{n.bajada}}</p>
-        {% endif %}
-      
-      {% endfor %}
-    </div>
+  <div id="hpage_cats">
+    {% for n in noticias %}
+      {% if n.publicado %}
+        <p>
+          <strong>
+            <div class="text-bg-light p-4">  
+              <h1>{{n.titulo}}</h1>
+            </div>
+          </strong>
+        </p>
+        <p>{{n.bajada}}</p>
+        <p>Sección: 
+          {% if n.seccion == "politica" %}
+            {% with secc="Política" %}
+            <span class="badge bg-secondary">{{secc}}</span> 
+            {% endwith %}
+          {% elif n.seccion == "economia" %}
+            {% with secc="Economía" %}
+            <span class="badge bg-secondary">{{secc}}</span>
+            {% endwith %}
+          {% elif n.seccion == "sociedad" %}
+            {% with secc="Sociedad" %}
+            <span class="badge bg-secondary">{{secc}} </span>
+            {% endwith %}
+          {% elif n.seccion == "deportes" %}
+            {% with secc="Deportes" %}
+            <span class="badge bg-secondary">{{secc}}</span>
+            {% endwith %}
+          {% endif %}
+        </p>
+        <p>Autor/a: {{n.periodistxs}}</p>
+        <p>ID: {{n.id}}</p>
+      {% endif %}
+    {% endfor %}
   </div>
+</div>
 
 {% endblock %}

@@ -44,7 +44,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <header>
   <div class="wrapper col0">
   <div id="topline">
-    <p>| Mail: ssiddi@gmail.com</p>
+    <p>| Mail: ssiddi@gmail.com |</p>
     <ul>
       <li><a href="{% url 'nueva_publicacion' %}">Crear nueva publicación</a></li>
       <li><a href="{% url 'formulario_lectorxs' %}">Registrarse como lectorxs</a></li>
@@ -76,15 +76,15 @@ Licence URI: http://www.os-templates.com/template-terms
         <li><a href="{% url 'deportes' %}">Deportes</a></li>
       </ul>
     </div>
+ 
     <div id="search">
+      
       <form action="{% url 'resultados' %}" method="GET">
-  
-        
-         
           <input type="text" name="texto" id="texto" value="" />
           <input type="submit" style="height: 28px; width: 150px;" name="go" id="go" value="Buscar Noticias" />
      
       </form>
+    
     </div>
     <br class="clear" />
   </div>

@@ -16,36 +16,89 @@ function countCharsBajada(obj){
 
 <div class="wrapper">
     <div id="hpage_cats">
+        
         <h1>Ingresar nueva publicación</h1>
-<form action="nueva_publicacion" method="POST">
-    {% csrf_token %}
-    <select name="seccion" required>
-        <option value="politica" selected>Política</option>
-        <option value="economia">Economía</option>
-        <option value="sociedad">Sociedad</option>
-        <option value="deportes">Deportes</option>
-      </select>
-    <br>
-    <br>
-    <h3>Título</h3>
-    <td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>
-    <td><h5 id="charNum">0 caractéres</h5> </td>
-    <br>
-    <h3>Bajada</h3>
-    <br>
-    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" minlength="0" maxlength="10000" rows="6" cols="140" placeholder="Bajada hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
-    <td><h5 id="charNum2">0 caractéres</h5> </td>
-    <br>
-    <br>
-    Nombre:
-    <input type="text" size="100" name="periodistxs" required>
-    <br>
-    <br>
-    E-mail:
-    <input type="email" size="100"  name="email_preiodistxs" required>
-    <br>
-    <br>
-<!--    Publicado
+       
+        <form action="nueva_publicacion" method="POST">
+        {% csrf_token %}
+
+        
+        <!-- SELECTOR DE SECCION DE LA NOTICIA -->
+
+            <label for="selector-seccion" class="form-label">Sección</label>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="seccion" id="selector-seccion" required>
+                <option value="politica" selected>Política</option>
+                <option value="economia">Economía</option>
+                <option value="sociedad">Sociedad</option>
+                <option value="deportes">Deportes</option>
+            </select>
+        <br>
+
+
+        <!-- TITULO HASTA 140 CARACTERES -->
+
+        <div class="mb-3">
+            <label for="id_titulo" class="form-label">Título</label>
+            <td><input type="text" class="form-control" size="140" id="id_titulo" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>
+            <td><h5 id="charNum">0 caractéres</h5> </td>
+        </div>
+        <br>
+
+
+        <!-- TEXTAREA BAJADA HASTA 10 MIL CARACTERES-->
+
+        <div class="mb-3">  
+            <label for="Textarea_Bajada" class="form-label">Bajada</label>
+            <textarea class="form-control" name="bajada" id="Textarea_Bajada" minlength="0" maxlength="10000" rows="3" placeholder="Hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
+            <td><h5 id="charNum2">0 caractéres</h5> </td>
+        </div>
+        <br>
+
+        <!-- NOMBRE Y MAIL DE REDACTORXS -->
+
+        <div class="mb-3">
+            <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example" name="periodistxs" id="id_nombre" required>
+        </div>
+        <br>
+        <div class="mb-3">
+            <input class="form-control" type="email" placeholder="e-mail" aria-label="default input example" name="email_preiodistxs" id="id_email" required>
+        </div>
+        <br>
+
+
+        <!-- SELECTORES BOOLEANOS de publicar y home -->
+
+        <form class="row g-3">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="id_publicado" class="form-label">Publicado</label>
+                    <select class="form-control" v-model="allowMultiple" name="publicado" id="id_publicado">
+                        <option v-bind:value="true">Si</option>
+                        <option v-bind:value="false">No</option>
+                    </select>
+                </div>
+            </div>
+        <br>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="id_home" class="form-label">Home</label>
+                    <select class="form-control" v-model="allowMultiple" name="home" id="id_home">
+                        <option v-bind:value="true">Si</option>
+                        <option v-bind:value="false">No</option>
+                    </select>
+                </div>
+            </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+    </div>
+</div>
+
+
+
+ <!--  RESOLVER BOOLEANO
+     
+    Publicado
     <select name="publicado" required>
         <option value=True selected>Si</option>
         <option value=False>No</option>
@@ -65,26 +118,4 @@ function countCharsBajada(obj){
     <input type="checkbox" name="home" id="home">
 
 -->
-   
-    <div class="form-group">
-        <label for="">Publicado</label>
-        <select class="form-control" v-model="allowMultiple" name="publicado">
-            <option v-bind:value="true">Si</option>
-            <option v-bind:value="false">No</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="">Poner en home</label>
-        <select class="form-control" v-model="allowMultiple" name="home">
-            <option v-bind:value="true">Si</option>
-            <option v-bind:value="false">No</option>
-        </select>
-    </div>
-    
-    <input type="submit" value="Enviar">
-
-</form>
-</div>
-</div>
-
 {% endblock %}

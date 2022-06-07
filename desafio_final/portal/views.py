@@ -136,7 +136,7 @@ def resultados(request):
     
 #Lectura de noticias mediante link en título (Work in Progress)
 def lectura(request,id):
-        noticias = Noticia.objects.filter(id__icontains = id)
+        noticias = Noticia.objects.filter(id__exact = id)
         return render (request,"7lectura.html",{"noticias":noticias})
 
 def borrar_publicacion(request,id_noticia):

@@ -27,7 +27,7 @@ class Lectorxs(models.Model):
 
 
     def __str__(self):
-            return f"Nombre: {self.nombre_lectorxs}, E-mail: {self.email_lectorxs}"
+            return f"ID: {self.id} Nombre: {self.nombre_lectorxs}, E-mail: {self.email_lectorxs}"
 
 class Periodistxs(models.Model):
     nombre_periodistxs = models.CharField(max_length=50)
@@ -37,4 +37,4 @@ class Periodistxs(models.Model):
     dni_periodistxs = models.IntegerField()
 
     def __str__(self):
-            return f"Nombre: {self.nombre_periodistxs}, E-mail: {self.email_periodistxs}"
+            return f"ID: {self.id} - Nombre: {self.nombre_periodistxs}, E-mail: {self.email_periodistxs}"
