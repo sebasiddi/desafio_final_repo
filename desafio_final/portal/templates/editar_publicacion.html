@@ -1,3 +1,4 @@
+
 {% extends "padre.html" %}
 
 {% load static %}
@@ -16,9 +17,11 @@ function countCharsBajada(obj){
 
 <div class="wrapper">
     <div id="hpage_cats">
-        <h1>Ingresar nueva publicación</h1>
-<form action="nueva_publicacion" method="POST">
-    {% csrf_token %}
+        <h1>editar publicación</h1>
+    
+    <form action="{% url 'editar_publicacion' formulario_publicacion.id %}" method="POST">
+       
+        {% csrf_token %}
     <select name="seccion" required>
         <option value="politica" selected>Política</option>
         <option value="economia">Economía</option>
@@ -33,7 +36,7 @@ function countCharsBajada(obj){
     <br>
     <h3>Bajada</h3>
     <br>
-    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" minlength="0" maxlength="10000" rows="6" cols="140" placeholder="Bajada hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
+    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" placeholder="Bajada hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
     <td><h5 id="charNum2">0 caractéres</h5> </td>
     <br>
     <br>

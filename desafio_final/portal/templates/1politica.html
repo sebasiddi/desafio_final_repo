@@ -3,55 +3,37 @@
 {% load static %}
 
 {% block contenido %}
+
+
+
+
 <div class="wrapper">
   <div id="hpage_cats">
-<h1>Política</h1>
+
+    <h1>Política</h1>
 
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Título</th>
-        <th scope="col">Bajada</th>
-    </tr>
-    </thead>
-    <tbody>
-      {% for n in noticias %}
-       {% if n.seccion == "politica" %}
-        <tr>
-            <td>{{n.titulo}}</td>
-            <td>{{n.bajada}}</td>
-        </tr>
-       {% endif %} 
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        {% for n in noticias %}
+        {% if n.seccion == "politica" and n.publicado == True %}
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
+            {{n.titulo}}
+          </button>
+        </h2>
+        <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">{{n.bajada}}
+            <br>
+         
+            <a href="{% url 'lectura' n.id %}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
+                       
+          </div>
+        </div>
+      
+      {% endif %} 
       {% endfor %}
-    </tbody>
-  </table>
-</div>
-</div>
-<div class="column">
-<div id="featured">
-  {% for n in noticias %}
-       {% if n.seccion == "politica" %}
-  <ul>
-    <li>
-      <h2>{{n.titulo}}</h2>
-      <p class="imgholder"><img src="../images/demo/240x90.gif" alt="" /></p>
-      <p>{{n.bajada}}</p>
-      <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
-    </li>
-  </ul>
-  {% endif %} 
-  {% endfor %}
-</div>
-</div>
-<!--
-  {% for n in noticias %}
-  {% if n.seccion == "politica" %}
-       
-        <h2>{{n.titulo}}</h2>
-        <h4>{{n.bajada}}</h4>
-   
-  {% endif %} 
- {% endfor %}
- -->
+      </div>
+    </div>
+
 {% endblock %}

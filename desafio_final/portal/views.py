@@ -63,9 +63,10 @@ def nueva_publicacion(request):
                             publicado = datos['publicado'],
                             home = datos['home'])
            
-            posteo.save()
-             
-            return render(request, "index.html")
+            posteo.save() 
+            noticias=Noticia.objects.all()
+
+            return render (request, "index.html" , {"noticias":noticias[::-1]})
      
     return render(request, "5nueva_publicacion.html")
 
@@ -85,7 +86,9 @@ def formulario_lectorxs(request):
                              nro_tarjeta_crédito =datos['nro_tarjeta_crédito'],
                              modo_suscripcion = datos['modo_suscripcion'],)
             alta_lectorxs.save()
-            return render(request, "index.html")
+            noticias=Noticia.objects.all()
+
+            return render (request, "index.html" , {"noticias":noticias[::-1]})
         return render(request,"index.html")
     
     return render(request,"formulario_lectorxs.html")
@@ -106,9 +109,10 @@ def formulario_periodistxs(request):
                                            email_periodistxs = datos['email_periodistxs'],
                                            dni_periodistxs=datos['dni_periodistxs'],)
             alta_periodistxs.save()
-            return render(request, "index.html")
-        else:
-            print("falla en el form")
+            noticias=Noticia.objects.all()
+
+            return render (request, "index.html" , {"noticias":noticias[::-1]})
+     
         return render(request,"index.html")
     
     return render(request,"formulario_periodistxs.html")
@@ -134,3 +138,43 @@ def resultados(request):
 def lectura(request,id):
         noticias = Noticia.objects.filter(id__icontains = id)
         return render (request,"7lectura.html",{"noticias":noticias})
+
+def borrar_publicacion(request,id_noticia):
+    noticia_para_borrar = Noticia.objects.get(id=id_noticia)
+    noticia_para_borrar.delete()
+
+    noticias=Noticia.objects.all()
+
+    return render (request, "index.html" , {"noticias":noticias[::-1]})
+
+def editar_publicacion(request,id_noticia):
+    noticia_para_editar = Noticia.objects.get(id=id_noticia)
+
+    if request.method == "POST":
+        formulario_publicacion = Nueva_noticia(request.POST)
+        if formulario_publicacion.is_valid():
+            datos = formulario_publicacion.cleaned_data
+            noticia_para_editar.seccion=datos['seccion']
+            noticia_para_editar.titulo = datos['titulo']
+            noticia_para_editar.bajada = datos['bajada']
+            noticia_para_editar.periodistxs = datos['periodistxs']
+            noticia_para_editar.email_preiodistxs = datos['email_preiodistxs']
+            noticia_para_editar.publicado = datos['publicado']
+            noticia_para_editar.home = datos['home']
+            noticia_para_editar.save()
+            noticias = Noticia.objects.all() 
+            return render(request, "index.html",{"noticias":noticias[::-1]})
+    
+    else:
+        
+        formulario_publicacion = Nueva_noticia(initial={'seccion':noticia_para_editar.seccion ,
+        'titulo':noticia_para_editar.titulo,
+        'bajada':noticia_para_editar.bajada,
+        'periodistxs':noticia_para_editar.periodistxs,
+        'email_preiodistxs':noticia_para_editar.email_preiodistxs,
+        'publicado':noticia_para_editar.publicado,
+        'home': noticia_para_editar.home})
+    
+            
+    return render(request , "editar_publicacion.html" , {"formulario_publicacion":formulario_publicacion ,"id_noticia":id_noticia})
+    

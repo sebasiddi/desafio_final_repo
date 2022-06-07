@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
-
+from portal import views
 urlpatterns = [
+    path('',views.inicio ),
     path('admin/', admin.site.urls),
     path("portal/" , include("portal.urls")),
 ]

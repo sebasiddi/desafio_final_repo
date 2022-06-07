@@ -10,9 +10,9 @@
 |Últimos Títulos|  
   {% if n.seccion == "politica" %}
     {% with secc="Política" %}
-      {{secc}}: {{n.titulo}}
+    <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
     {% endwith %}
-  {% elif n.seccion == "economía" %}
+  {% elif n.seccion == "economia" %}
     {% with secc="Economía" %}
       {{secc}}: {{n.titulo}}
     {% endwith %}
@@ -28,18 +28,74 @@
 {% endfor %}</marquee></h2>
 
 
+
+
+
 <div class="wrapper">
   <div id="hpage_cats">
+
+
+
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        {% for n in noticias %}
+        {% if n.home == True and n.publicado == True %}
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
+            {% if n.seccion == "politica" %}
+              {% with secc="POLÍTICA" %}
+              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              {% endwith %}
+            {% elif n.seccion == "economia" %}
+              {% with secc="ECONOMÍA" %}
+              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              {% endwith %}
+            {% elif n.seccion == "sociedad" %}
+              {% with secc="SOCIEDAD" %}
+              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              {% endwith %}
+            {% elif n.seccion == "deportes" %}
+              {% with secc="DEPORTES" %}
+              <span class="badge bg-secondary">{{secc}}</span>  {{n.titulo}}
+              {% endwith %}
+            {% endif %}: {{n.titulo}}
+          </button>
+        </h2>
+        <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">{{n.bajada}}
+            <br>
+         
+            <a href="{% url 'lectura' n.id %}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
+            <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary"></i> Editar</button></a>
+            <a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> Borrar</button></a>
+            
+          </div>
+        </div>
+      
+      {% endif %} 
+      {% endfor %}
+      </div>
+    </div>
+    
+
+
+<!--
+
     {% for n in noticias %}
       {% if n.home %}
         <h2><a href="{{n.seccion}}">{{n.seccion}} &raquo;</a></h2>
-        <!-- <p><strong><a href="lectura/{{n.id}}"></a>>{{n.titulo}}</a></strong></p>  Link a noticia indivual WIP-->
-        <p><strong><a href="inicio"></a>{{n.titulo}}</a></strong></p>
-        <p>{{n.bajada}}</p>
-
+        <p><strong><a href="{% url 'lectura'  %}">{{n.titulo}}</a></strong></p>  -->
+        <!-- <p><strong><a href="inicio"></a>{{n.titulo}}</a></strong></p> -->
+  <!--     <p>{{n.bajada}}</p>
+        <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
+        <a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger">Borrar</button></a>
       {% endif %}
     
     {% endfor %}
+
+  -->
+
   </div>
 </div>
 
