@@ -9,6 +9,7 @@
   <div class="text-bg-primary p-1">
     <h2>
       <marquee behavior="" direction="">
+        
         {% for n in noticias %}
           |Últimos Títulos|  
           {% if n.seccion == "politica" %}
@@ -29,15 +30,19 @@
             {% endwith %}
           {% endif %}
         {% endfor %}
+        
       </marquee>
     </h2>
   </div>
 </div>
 
 
+
+
 <!-- DESPLIEGUE DE ACORDEON CON TITULOS -->
 <div class="wrapper">
   <div id="hpage_cats">
+    <h1>{{mensaje}}</h1>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         {% for n in noticias %}
@@ -81,6 +86,7 @@
     </div>
   </div>
 </div>
+
 
 
 

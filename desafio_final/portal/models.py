@@ -14,7 +14,7 @@ class Noticia(models.Model):
     home = models.BooleanField()
 
     def __str__(self):
-            return f"Sección: {self.seccion} - Título: {self.titulo}"
+            return f"ID: {self.id} | Sección: {self.seccion} - Título: {self.titulo}"
 
 
 class Lectorxs(models.Model):

@@ -19,19 +19,19 @@
         <p>Sección: 
           {% if n.seccion == "politica" %}
             {% with secc="Política" %}
-            <span class="badge bg-secondary">{{secc}}</span> 
+            <a href="{% url 'politica' %}"><span class="badge bg-secondary">{{secc}}</span> </a>
             {% endwith %}
           {% elif n.seccion == "economia" %}
             {% with secc="Economía" %}
-            <span class="badge bg-secondary">{{secc}}</span>
+            <a href="{% url 'economia' %}"><span class="badge bg-secondary">{{secc}}</span></a>
             {% endwith %}
           {% elif n.seccion == "sociedad" %}
             {% with secc="Sociedad" %}
-            <span class="badge bg-secondary">{{secc}} </span>
+            <a href="{% url 'sociedad' %}"><span class="badge bg-secondary">{{secc}} </span></a>
             {% endwith %}
           {% elif n.seccion == "deportes" %}
             {% with secc="Deportes" %}
-            <span class="badge bg-secondary">{{secc}}</span>
+            <a href="{% url 'deportes' %}"><span class="badge bg-secondary">{{secc}}</span></a>
             {% endwith %}
           {% endif %}
         </p>
@@ -39,7 +39,8 @@
         <p>ID: {{n.id}}</p>
       {% endif %}
     {% endfor %}
+    <a href="{% url 'inicio' %}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Volver al inicio</button></a>
   </div>
-</div>
+</dv>
 
 {% endblock %}

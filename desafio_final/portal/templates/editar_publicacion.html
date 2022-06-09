@@ -17,36 +17,57 @@ function countCharsBajada(obj){
 
 <div class="wrapper">
     <div id="hpage_cats">
-        <h1>editar publicación</h1>
+        <h1>Editar publicación</h1>
     
-    <form action="{% url 'editar_publicacion' formulario_publicacion.id %}" method="POST">
+    <form action="{% url 'editar_publicacion' noticia_para_editar.id %}" method="POST">
        
         {% csrf_token %}
     <select name="seccion" required>
-        <option value="politica" selected>Política</option>
-        <option value="economia">Economía</option>
-        <option value="sociedad">Sociedad</option>
-        <option value="deportes">Deportes</option>
+        {% if noticia_para_editar.seccion == "politica" %}
+            <option value="politica" selected>Política</option>
+            <option value="economia">Economía</option>
+            <option value="sociedad">Sociedad</option>
+            <option value="deportes">Deportes</option>
+        {% elif noticia_para_editar.seccion == "economía" %}
+            <option value="politica">Política</option>
+            <option value="economia" selected>Economía</option>
+            <option value="sociedad">Sociedad</option>
+            <option value="deportes">Deportes</option>
+        {% elif noticia_para_editar.seccion == "sociedad" %}
+            <option value="politica">Política</option>
+            <option value="economia">Economía</option>
+            <option value="sociedad"> selectedSociedad</option>
+            <option value="deportes">Deportes</option>
+        {% elif noticia_para_editar.seccion == "deportes" %}
+            <option value="politica">Política</option>
+            <option value="economia">Economía</option>
+            <option value="sociedad">Sociedad</option>
+            <option value="deportes" selected>Deportes</option>
+        {% endif %}
+
       </select>
     <br>
     <br>
     <h3>Título</h3>
-    <td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>
+    
+    <td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" name="titulo" onkeyup="countChars(this);" value="{{ formulario_publicacion.titulo.value }}" required></td>
+    <!--<td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>-->
     <td><h5 id="charNum">0 caractéres</h5> </td>
     <br>
     <h3>Bajada</h3>
     <br>
-    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" placeholder="Bajada hasta 10k caractéres" onkeyup="countCharsBajada(this);" required></textarea>
+    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsBajada(this);" required>  {{ formulario_publicacion.bajada.value }} </textarea>
     <td><h5 id="charNum2">0 caractéres</h5> </td>
     <br>
     <br>
     Nombre:
-    <input type="text" size="100" name="periodistxs" required>
+    <input type="text" size="100" name="periodistxs" value="{{ formulario_publicacion.periodistxs.value }}" required>
     <br>
     <br>
     E-mail:
-    <input type="email" size="100"  name="email_preiodistxs" required>
+    <input type="email" size="100"  name="email_preiodistxs" value="{{ formulario_publicacion.email_preiodistxs.value }}" required>
     <br>
+  
     <br>
 <!--    Publicado
     <select name="publicado" required>

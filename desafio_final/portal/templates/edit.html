@@ -1,0 +1,48 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<script>
+
+function countChars(obj){
+    document.getElementById("charNum").innerHTML = obj.value.length+' caracteres (max 140)';
+}
+function countCharsBajada(obj){
+    document.getElementById("charNum2").innerHTML = obj.value.length+' caracteres (max 10 mil';
+}
+
+</script>
+
+<div class="wrapper">
+    <div id="hpage_cats">
+        
+        <h1>editar publicación</h1>
+        <form action="{% url 'edit' noticia_editar.id %}" method="POST">
+
+        {% csrf_token %}
+
+        <p>seccion:</p>
+        {{mi_formulario.seccion}}
+        <p>titulo:</p>
+        <input type="text" value="{{mi_formulario.titulo}}" class="form-control" size="140" id="exampleFormControlInput1" name="titulo" onkeyup="countChars(this);" required></td>
+        {{mi_formulario.titulo}}
+        <p>bajada:</p>
+        {{mi_formulario.bajada}}
+        <p>periodistxs:</p>
+        {{mi_formulario.periodistxs}}
+        <p>email_preiodistxs:</p>
+        {{mi_formulario.email_preiodistxs}}
+        <p>publicado:</p>
+        {{mi_formulario.publicado}}
+        <p>home:</p>
+        {{mi_formulario.home}}
+
+        
+        <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

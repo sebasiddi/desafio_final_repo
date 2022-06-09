@@ -1,0 +1,17 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<div class="wrapper">
+    <div id="hpage_cats">
+        <h1>Registro</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{form.as_p}}
+                <button type="submit">Registrar</button>
+            </form>
+    </div>
+</div>
+{% endblock %}   
