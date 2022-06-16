@@ -1,9 +1,9 @@
 from ast import Pass
 from turtle import home
 from django.shortcuts import render
-from portal.forms import Nueva_noticia, Nuevxs_Lectorxs, Nuevxs_Periodistxs
+from portal.forms import Nueva_noticia, Nuevxs_Lectorxs, Nuevxs_Periodistxs, User_Edit_Form
 from django.http import HttpResponse
-from portal.models import Noticia, Lectorxs, Periodistxs
+from portal.models import Noticia, Lectorxs, Periodistxs, Avatar
 from django.template import loader
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,authenticate, logout
@@ -12,46 +12,50 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #Página de inicio
+"""
 def inicio(request):
     noticias = Noticia.objects.all()
     dicc = {"noticias":noticias[::-1]}
     seccion = loader.get_template("index.html")
     documento=seccion.render(dicc)
     return HttpResponse(documento)
+"""
+
+def home(request):
+    return render(request, "home.html")
+
+
+def inicio(request):
+    noticias= Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
+    return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+
 
 #Secciones
 @login_required
 def politica(request):
-    noticias = Noticia.objects.all()
-    dicc = {"noticias":noticias[::-1]}
-    seccion = loader.get_template("1politica.html")
-    documento=seccion.render(dicc)
-    return HttpResponse(documento)
+    noticias= Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
+    return render(request, "1politica.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+
 
 @login_required
 def economia(request):
-    noticias = Noticia.objects.all()
-    dicc = {"noticias":noticias[::-1]}
-    seccion = loader.get_template("2economia.html")
-    documento=seccion.render(dicc)
-    return HttpResponse(documento)
+    noticias= Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
+    return render(request, "2economia.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 @login_required
 def sociedad(request):
-    noticias = Noticia.objects.all()
-    dicc = {"noticias":noticias[::-1]}
-    seccion = loader.get_template("3sociedad.html")
-    documento=seccion.render(dicc)
-    return HttpResponse(documento)
+    noticias= Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
+    return render(request, "3sociedad.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 @login_required
 def deportes(request):
-    noticias = Noticia.objects.all()
-    print(type(noticias))
-    dicc = {"noticias":noticias[::-1]}
-    seccion = loader.get_template("4deportes.html")
-    documento=seccion.render(dicc)
-    return HttpResponse(documento)
+    noticias= Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
+    return render(request, "4deportes.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 # Formulario para ingresar nuevo posteo de noticias
 @login_required
@@ -221,10 +225,13 @@ def login_request(request):
                 login(request, user)
                 noticias=Noticia.objects.all()
                 noticias=Noticia.objects.all()
-
-                return render(request, "index.html",{"mensaje":f"Bienvenido {usuario}","noticias":noticias[::-1]})
-                #return render(request, "index.html",{"mensaje":f"Bienvenido {usuario}"})
-
+                noticias_titulos=noticias[::-1]
+                avatares = Avatar.objects.filter(user=request.user.id)
+                if avatares.exists():
+                    print(avatares[0].imagen.url)
+                    return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+                else:
+                    return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
             else:
                 return render(request,"index.html",{"mensaje","Error, datos incorrectos"})
         else:
@@ -249,4 +256,26 @@ def register(request):
     return render (request, "registro.html",{"form":form})
 
 
+@login_required
+def editar_perfil(request):
+    
+    usuario=request.user
+    
+    if request.method == 'POST':
+            miFormulario=User_Edit_Form(request.POST)
+            if miFormulario.is_valid():
+                informacion = miFormulario.cleaned_data
 
+                usuario.email = informacion['email']
+                password = informacion['password1']
+                usuario.set_password(password)
+                usuario.save()
+
+                return render(request,"index.html")
+    else:
+        miFormulario = User_Edit_Form ( initial = {'email':usuario.email} )
+        avatares = Avatar.objects.filter(user=request.user.id)
+
+    return render(request,"editar_perfil.html",{"miFormulario":miFormulario,"usuario":usuario,"url":avatares[0].imagen.url})
+
+    

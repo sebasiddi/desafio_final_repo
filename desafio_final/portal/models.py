@@ -1,6 +1,7 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.forms import CharField, DateField, EmailField, IntegerField
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 #Modelo de posteo de noticias
@@ -38,3 +39,7 @@ class Periodistxs(models.Model):
 
     def __str__(self):
             return f"ID: {self.id} - Nombre: {self.nombre_periodistxs}, E-mail: {self.email_periodistxs}"
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True ,blank=True )

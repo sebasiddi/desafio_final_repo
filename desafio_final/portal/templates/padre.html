@@ -31,14 +31,22 @@ Licence URI: http://www.os-templates.com/template-terms
 <header>
   <div class="wrapper col0">
   <div id="topline">
-    <p>| Mail: ssiddi@gmail.com |</p>
+    {% if request.user.is_authenticated %}
+    <p>|{{user.username}}| <img SRC= "{{url}}" alt="foto de perfil"  width="40" height="30"></p>
+    {% endif %}
     <ul>
       <li><a href="{% url 'nueva_publicacion' %}">Crear nueva publicación</a></li>
       <li><a href="{% url 'formulario_lectorxs' %}">Registrarse como lectorxs</a></li>
       <li><a href="{% url 'formulario_periodistxs' %}">Registrarse como periodistxs</a></li>
-      <li><a href="{% url 'Login' %}">Log in</a></li>
-      <li><a href="{% url 'register' %}">Register</a></li>
-      <li><a href="{% url 'logout' %}">Salir</a></li>
+      
+      {% if not request.user.is_authenticated %}
+        <li><a href="{% url 'Login' %}">Iniciar sesión</a></li>
+        <li><a href="{% url 'register' %}">Registrarse</a></li>
+      {% else %}
+        <li><a href="{% url 'editar_perfil' %}">Editar perfil</a></li>
+        <li><a href="{% url 'logout' %}">Salir</a></li>
+      {% endif %}
+      
     </ul>
     <br class="clear" />
   </div>
@@ -84,6 +92,38 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 <!-- Contenido Variable -->
+<div class="sticky-top">
+  <div class="text-bg-primary p-1">
+    <h2>
+
+<marquee behavior="" direction="">
+        
+  {% for n in noticias_titulos %}
+    |Últimos Títulos|  
+    {% if n.seccion == "politica" %}
+      {% with secc="Política" %}
+      <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+      {% endwith %}
+    {% elif n.seccion == "economia" %}
+      {% with secc="Economía" %}
+      <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+      {% endwith %}
+    {% elif n.seccion == "sociedad" %}
+      {% with secc="Sociedad" %}
+      <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+      {% endwith %}
+    {% elif n.seccion == "deportes" %}
+      {% with secc="Deportes" %}
+      <span class="badge bg-secondary">{{secc}}</span> {{n.titulo}}
+      {% endwith %}
+    {% endif %}
+  {% endfor %}
+  
+</marquee>
+
+</h2>
+</div>
+</div>
 
 {% block  contenido %}
 

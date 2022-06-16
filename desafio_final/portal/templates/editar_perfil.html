@@ -1,0 +1,24 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<div class="wrapper">
+    <div id="hpage_cats">
+    <h1>Editar Perfil | {{usuario}}</h1>
+    <img SRC= "{{url}}" alt="foto de perfil"  width="70" height="55"></p>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+      
+            {{miFormulario.as_p}}
+       
+            <button type="submit">Modificar</button>
+
+    </form>
+
+</div>
+</dv>
+
+{% endblock %}
