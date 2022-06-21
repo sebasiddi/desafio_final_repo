@@ -21,8 +21,9 @@ urlpatterns = [
     path("login",views.login_request,name="Login"),
     path("register",views.register,name="register"),
     path("logout",LogoutView.as_view(template_name="logout.html"),name="logout"),
-    path("edit/<id_noticia>",views.edit,name="edit"),
-    path("edit",views.edit,name="edit"),
     path("editar_perfil",views.editar_perfil,name="editar_perfil"),
-    path("home",views.home,name="home")
+    path("home",views.home,name="home"),
+    path("mis_publicaciones",views.mis_publicaciones,name="mis_publicaciones"),
+    path("about",views.about,name="about")
+    
 ]

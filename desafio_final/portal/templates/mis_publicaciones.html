@@ -5,19 +5,14 @@
 {% block contenido %}
 
 
+<!-- DESPLIEGUE DE ACORDEON CON TITULOS -->
 <div class="wrapper">
   <div id="hpage_cats">
-
-  
-
-
-
-<!-- DESPLIEGUE DE ACORDEON CON TITULOS -->
-
+    <br>
+    <h5>Publicaciones hechas por {{user.username}}</h5>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         {% for n in noticias %}
-        {% if n.home == True and n.publicado == True %}
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
             {% if n.seccion == "politica" %}
@@ -65,7 +60,7 @@
             {% endif %}
           </div>
         </div>
-        {% endif %} 
+    
         {% endfor %}
       </div>
     </div>
@@ -73,23 +68,6 @@
 </div>
 
 
-
-
 {% endblock %}    
 
 
-<!--
-
-    {% for n in noticias %}
-      {% if n.home %}
-        <h2><a href="{{n.seccion}}">{{n.seccion}} &raquo;</a></h2>
-        <p><strong><a href="{% url 'lectura'  %}">{{n.titulo}}</a></strong></p>  -->
-        <!-- <p><strong><a href="inicio"></a>{{n.titulo}}</a></strong></p> -->
-  <!--     <p>{{n.bajada}}</p>
-        <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
-        <a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger">Borrar</button></a>
-      {% endif %}
-    
-    {% endfor %}
-
-  -->

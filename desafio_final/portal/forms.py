@@ -6,9 +6,12 @@ from django.contrib.auth.models import User
 class Nueva_noticia(forms.Form):
     seccion = forms.CharField(max_length=50)
     titulo = forms.CharField(max_length=140)
-    bajada = forms.CharField(max_length=100000)
-    periodistxs = forms.CharField(max_length=50)
-    email_preiodistxs = forms.EmailField()
+    bajada = forms.CharField(max_length=10000)
+    cuerpo = forms.CharField(max_length=30000)
+    #fecha = forms.DateField()
+    img = forms.ImageField()
+    nombre_user = forms.CharField(max_length=50)
+    id_user = forms.IntegerField()
     publicado = forms.BooleanField()
     home = forms.BooleanField()
 

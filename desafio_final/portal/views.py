@@ -1,4 +1,6 @@
 from ast import Pass
+from datetime import datetime
+from time import timezone
 from turtle import home
 from django.shortcuts import render
 from portal.forms import Nueva_noticia, Nuevxs_Lectorxs, Nuevxs_Periodistxs, User_Edit_Form
@@ -8,18 +10,11 @@ from django.template import loader
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,authenticate, logout
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
 # Create your views here.
 
 #Página de inicio
-"""
-def inicio(request):
-    noticias = Noticia.objects.all()
-    dicc = {"noticias":noticias[::-1]}
-    seccion = loader.get_template("index.html")
-    documento=seccion.render(dicc)
-    return HttpResponse(documento)
-"""
+
 
 def home(request):
     return render(request, "home.html")
@@ -28,40 +23,72 @@ def home(request):
 def inicio(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "index.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
+
+def mis_publicaciones(request):
+    noticiastodas= Noticia.objects.all()
+    noticias_titulos=noticiastodas[::-1]
+    noticias=Noticia.objects.filter(id_user__exact = request.user.id)
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "mis_publicaciones.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "mis_publicaciones.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 #Secciones
 @login_required
 def politica(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    return render(request, "1politica.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "1politica.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "1politica.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
-
+    
 @login_required
 def economia(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    return render(request, "2economia.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "2economia.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "2economia.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 @login_required
 def sociedad(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    return render(request, "3sociedad.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "3sociedad.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "3sociedad.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 @login_required
 def deportes(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    return render(request, "4deportes.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "4deportes.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "4deportes.html",{"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5]})
 
 # Formulario para ingresar nuevo posteo de noticias
 @login_required
 def nueva_publicacion(request):
+    noticias=Noticia.objects.all()
+    noticias_titulos=noticias[::-1]
     if request.method == "POST":
-        data_posteo = Nueva_noticia(request.POST)
+        data_posteo = Nueva_noticia(request.POST,request.FILES)
         if data_posteo.is_valid():
             datos=data_posteo.cleaned_data
             
@@ -71,17 +98,33 @@ def nueva_publicacion(request):
             posteo = Noticia(seccion=datos['seccion'] ,
                             titulo = datos['titulo'],
                             bajada = datos['bajada'],
-                            periodistxs = datos['periodistxs'],
-                            email_preiodistxs = datos['email_preiodistxs'],
+                            cuerpo = datos['cuerpo'],
+                            fecha = datetime.now(),
+                            img = datos['img'],
+                            nombre_user = datos['nombre_user'],
+                            id_user = datos['id_user'],
                             publicado = datos['publicado'],
                             home = datos['home'])
            
             posteo.save() 
             noticias=Noticia.objects.all()
+            avatares = Avatar.objects.filter(user=request.user.id)
+            
+            if avatares.exists():
+                return render(request, "index.html" , {"noticias":noticias[::-1],"noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+            else:
+                return render(request, "index.html" , {"noticias":noticias[::-1],"noticias_titulos":noticias_titulos[0:5]}) 
 
-            return render (request, "index.html" , {"noticias":noticias[::-1]})
-     
-    return render(request, "5nueva_publicacion.html")
+            
+        else:
+            print("data posteo no es valido")
+
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "5nueva_publicacion.html",{"noticias_titulos":noticias_titulos[0:5],"url":avatares[0].imagen.url})
+    else:
+        return render(request, "5nueva_publicacion.html",{"noticias_titulos":noticias_titulos[0:5]}) 
+
 
 
 #Formulario para alta de lectorxs
@@ -134,24 +177,39 @@ def formulario_periodistxs(request):
 #Búsqueda
 @login_required
 def resultados(request):
+
+        avatares = Avatar.objects.filter(user=request.user.id)
         if request.GET['texto']:
             texto = request.GET['texto']
             # Búsqueda por Título y contenido de la noticia
-            noticias = Noticia.objects.filter(bajada__icontains = texto) or Noticia.objects.filter(titulo__icontains = texto)
-            return render (request,"6resultados.html",{"noticias":noticias[::-1]})
+            noticias = Noticia.objects.filter(bajada__icontains = texto) or Noticia.objects.filter(titulo__icontains = texto) or Noticia.objects.filter(cuerpo__icontains = texto)
+            if avatares.exists():
+                return render(request, "6resultados.html",{"noticias":noticias[::-1], "url":avatares[0].imagen.url})
+            else:
+                return render (request,"6resultados.html",{"noticias":noticias[::-1]})
         else:
-            return render (request,"6resultados.html")
-    
-#Lectura de noticias mediante link en título (Work in Progress)
-@login_required
+            if avatares.exists():
+                return render(request, "6resultados.html",{"url":avatares[0].imagen.url})
+            else:
+                return render (request,"6resultados.html")
+
+#Lectura de noticias mediante link en título
+#@login_required
 def lectura(request,id):
-        noticias = Noticia.objects.filter(id__exact = id)
-        return render (request,"7lectura.html",{"noticias":noticias})
+    noticias = Noticia.objects.filter(id__exact = id)
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "7lectura.html",{"noticias":noticias[::-1], "url":avatares[0].imagen.url})
+    else:
+        return render(request, "7lectura.html",{"noticias":noticias[::-1]})
+
+  
 
 #Borrar publicaciones
 @login_required
 def borrar_publicacion(request,id_noticia):
     noticia_para_borrar = Noticia.objects.get(id=id_noticia)
+    noticia_para_borrar.img.delete(False)
     noticia_para_borrar.delete()
     noticias=Noticia.objects.all()
     return render (request, "index.html" , {"noticias":noticias[::-1]})
@@ -161,7 +219,7 @@ def borrar_publicacion(request,id_noticia):
 def editar_publicacion(request,id_noticia):
     noticia_para_editar = Noticia.objects.get(id=id_noticia)
     if request.method == "POST":
-        formulario_publicacion = Nueva_noticia(request.POST)
+        formulario_publicacion = Nueva_noticia(request.POST,request.FILES)
         
         
         if formulario_publicacion.is_valid():
@@ -171,45 +229,35 @@ def editar_publicacion(request,id_noticia):
             noticia_para_editar.seccion=datos['seccion']
             noticia_para_editar.titulo = datos['titulo']
             noticia_para_editar.bajada = datos['bajada']
-            noticia_para_editar.periodistxs = datos['periodistxs']
-            noticia_para_editar.email_preiodistxs = datos['email_preiodistxs']
+            noticia_para_editar.cuerpo = datos['cuerpo']
+            noticia_para_editar.fecha = datetime.now()
+            noticia_para_editar.img.delete(False)
+            noticia_para_editar.img = datos['img']
+            noticia_para_editar.nombre_user = datos['nombre_user']
+            noticia_para_editar.id_user = datos['id_user']
             noticia_para_editar.publicado = datos['publicado']
             noticia_para_editar.home = datos['home']
             noticia_para_editar.save()
             noticias = Noticia.objects.all() 
-            return render(request, "index.html",{"noticias":noticias[::-1]})
-    
-    else:
-        formulario_publicacion = Nueva_noticia(initial={'seccion':noticia_para_editar.seccion,'titulo':noticia_para_editar.titulo,'bajada':noticia_para_editar.bajada,'periodistxs':noticia_para_editar.periodistxs,'email_preiodistxs':noticia_para_editar.email_preiodistxs,'publicado':noticia_para_editar.publicado,'home': noticia_para_editar.home})
-
-    return render(request,"editar_publicacion.html",{"formulario_publicacion":formulario_publicacion ,"noticia_para_editar":noticia_para_editar})
-
-def edit(request,id_noticia):
-    noticia_editar = Noticia.objects.get(id=id_noticia)
-    if request.method == "POST":
-        miFormulario = Nueva_noticia(request.POST)
-        print(miFormulario)    
-
-        if miFormulario.is_valid():
-
-            informacion = miFormulario.cleaned_data
             
-            noticia_editar.seccion = informacion['seccion']
-            noticia_editar.titulo = informacion['titulo']
-            noticia_editar.bajada = informacion['bajada']
-            noticia_editar.periodistxs = informacion['periodistxs']
-            noticia_editar.email_preiodistxs = informacion['email_preiodistxs']
-            noticia_editar.publicado = informacion['publicado']
-            noticia_editar.home = informacion['home']
-            noticia_editar.save()
-
-            return render(request,"inicio.html")
+            avatares = Avatar.objects.filter(user=request.user.id)
+            if avatares.exists():
+                return render(request, "index.html",{"noticias":noticias[::-1],"url":avatares[0].imagen.url})
+            else:
+                return render(request, "index.html",{"noticias":noticias[::-1]}) 
+            
     else:
-        miFormulario=Nueva_noticia(initial={'seccion':noticia_editar.seccion,'titulo':noticia_editar.titulo,'bajada':noticia_editar.bajada,'periodistxs':noticia_editar.periodistxs,'email_preiodistxs':noticia_editar.email_preiodistxs,'publicado':noticia_editar.publicado,'home':noticia_editar.home,})
+        
+        formulario_publicacion = Nueva_noticia(initial={'seccion':noticia_para_editar.seccion,'titulo':noticia_para_editar.titulo,'bajada':noticia_para_editar.bajada,'cuerpo':noticia_para_editar.cuerpo,'img':noticia_para_editar.img,'nombre_user':noticia_para_editar.nombre_user,'id_user':noticia_para_editar.id_user,'publicado':noticia_para_editar.publicado,'home': noticia_para_editar.home})
+
     
-    return render(request,'edit.html',{"miFormulario":miFormulario,"noticia_editar":noticia_editar})
-    
-    
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares.exists():
+        return render(request, "editar_publicacion.html",{"formulario_publicacion":formulario_publicacion ,"noticia_para_editar":noticia_para_editar,"url":avatares[0].imagen.url})
+    else:
+        return render(request, "editar_publicacion.html",{"formulario_publicacion":formulario_publicacion ,"noticia_para_editar":noticia_para_editar}) 
+
+
 ############# LOGIN
 
 def login_request(request):
@@ -223,7 +271,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                noticias=Noticia.objects.all()
+                
                 noticias=Noticia.objects.all()
                 noticias_titulos=noticias[::-1]
                 avatares = Avatar.objects.filter(user=request.user.id)
@@ -248,7 +296,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("usuario creado")
+            return render(request, "reg_exito.html")
 
     else:
         form = UserCreationForm()
@@ -276,6 +324,12 @@ def editar_perfil(request):
         miFormulario = User_Edit_Form ( initial = {'email':usuario.email} )
         avatares = Avatar.objects.filter(user=request.user.id)
 
-    return render(request,"editar_perfil.html",{"miFormulario":miFormulario,"usuario":usuario,"url":avatares[0].imagen.url})
+    if avatares.exists():
+        return render(request,"editar_perfil.html",{"miFormulario":miFormulario,"usuario":usuario,"url":avatares[0].imagen.url})
+    else:
+        return render(request,"editar_perfil.html",{"miFormulario":miFormulario,"usuario":usuario})
 
+
+def about(request):
+    return render(request,"about.html")
     

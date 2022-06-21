@@ -10,16 +10,18 @@ function countChars(obj){
     document.getElementById("charNum").innerHTML = obj.value.length+' caracteres (max 140)';
 }
 function countCharsBajada(obj){
-    document.getElementById("charNum2").innerHTML = obj.value.length+' caracteres (max 10 mil';
+    document.getElementById("charNum2").innerHTML = obj.value.length+' caracteres (max 10 mil)';
 }
-
+function countCharsCuerpo(obj){
+    document.getElementById("charNum3").innerHTML = obj.value.length+' caracteres (max 30 mil)';
+}
 </script>
 
 <div class="wrapper">
     <div id="hpage_cats">
         <h1>Editar publicación</h1>
     
-    <form action="{% url 'editar_publicacion' noticia_para_editar.id %}" method="POST">
+    <form action="{% url 'editar_publicacion' noticia_para_editar.id %}" method="POST" enctype="multipart/form-data">
        
         {% csrf_token %}
     <select name="seccion" required>
@@ -60,14 +62,30 @@ function countCharsBajada(obj){
     <td><h5 id="charNum2">0 caractéres</h5> </td>
     <br>
     <br>
-    Nombre:
-    <input type="text" size="100" name="periodistxs" value="{{ formulario_publicacion.periodistxs.value }}" required>
+    <h3>Cuerpo de la noticia</h3>
+    <textarea class="form-control" name="cuerpo" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsCuerpo(this);" required>  {{ formulario_publicacion.cuerpo.value }} </textarea>
+    <td><h5 id="charNum3">0 caractéres</h5> </td>
     <br>
     <br>
-    E-mail:
-    <input type="email" size="100"  name="email_preiodistxs" value="{{ formulario_publicacion.email_preiodistxs.value }}" required>
     <br>
-  
+    <div class="mb-3">
+        <input class="form-control" type="file" placeholder="imagen" aria-label="default input example" name="img" id="id_img" required>
+    
+    </div>
+    <br>     
+      <!-- NOMBRE Y MAIL DE REDACTORXS -->
+        
+      <div class="mb-3">
+        <label for="id_nombre_user" class="form-label">Nombre</label>
+        <td><input type="text" class="form-control" size="140" id="id_nombre_user" value="{{user.username}}" name="nombre_user" readonly ></td>
+        
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="id_id_user" class="form-label">ID de Usuario</label>
+        <td><input type="number" class="form-control" size="140" id="id_id_user" value={{user.id}} name="id_user" readonly ></td>
+        
+    </div>
     <br>
 <!--    Publicado
     <select name="publicado" required>
@@ -106,7 +124,7 @@ function countCharsBajada(obj){
     </div>
     
     <input type="submit" value="Enviar">
-
+    <a href="{% url 'inicio' %}"><input type="button" value="Cancelar"></a>
 </form>
 </div>
 </div>
