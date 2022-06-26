@@ -24,6 +24,7 @@ urlpatterns = [
     path("editar_perfil",views.editar_perfil,name="editar_perfil"),
     path("home",views.home,name="home"),
     path("mis_publicaciones",views.mis_publicaciones,name="mis_publicaciones"),
+    path("cambiar_avatar",views.cambiar_avatar,name="cambiar_avatar"),
     path("about",views.about,name="about")
     
 ]

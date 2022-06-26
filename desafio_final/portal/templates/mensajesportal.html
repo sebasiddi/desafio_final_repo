@@ -1,0 +1,60 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<div class="wrapper">
+    <div id="hpage_cats">
+        <h1>Mensajes</h1>
+        
+        <a href="{% url 'nuevo_mensaje'%}"><button type="button" class="btn btn-success"> <i class="fa-solid fa-pen-to-square"></i></i> Nuevo Mensaje</button></a>
+
+        
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              {% for n in mensajes %}
+              {% if user.id == n.id_recibe  %}
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
+                    {% for u in users %}
+                        {% if u.user_id == n.id_envia %}
+                            De: {{u.user}} | {{n.titulo_mensaje}} | {{n.fecha_mensaje}} 
+                        {% endif %}
+                    {% endfor %}
+                    
+                </button>
+              </h2>
+              <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <div>
+                
+                      {{n.cuerpo_mensaje}}
+                 
+                  </div>
+                  <br>
+                  
+                  <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Borrar</a>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      ¿Borrar definitivamente el mensaje {{n.titulo_mensaje}}?<a href="{% url 'borrar_mensaje' n.id %}"><button type="button" class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> Si</button></a>
+                    </div>
+                  </div>
+                  
+               
+                </div>
+              </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}   

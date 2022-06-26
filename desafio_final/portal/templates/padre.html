@@ -45,6 +45,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <li><a href="{% url 'register' %}">Registrarse</a></li>
       {% else %}
         <li><a href="{% url 'mis_publicaciones' %}">Mis Publicaciones</a></li>  
+        <li><a href="{% url 'inbox' %}">Mensajes</a></li>  
         <li><a href="{% url 'editar_perfil' %}">Editar perfil</a></li>
         <li><a href="{% url 'logout' %}">Salir</a></li>
       {% endif %}

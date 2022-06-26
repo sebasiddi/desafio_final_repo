@@ -25,6 +25,7 @@ urlpatterns = [
     path('',views.home ),
     path('admin/', admin.site.urls),
     path("portal/" , include("portal.urls")),
+    path("mensajes/",include("mensajes.urls"))
 ]
 
 
