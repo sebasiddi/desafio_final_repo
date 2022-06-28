@@ -12,8 +12,8 @@ class Nueva_noticia(forms.Form):
     img = forms.ImageField()
     nombre_user = forms.CharField(max_length=50)
     id_user = forms.IntegerField()
-    publicado = forms.BooleanField()
-    home = forms.BooleanField()
+    publicado = forms.IntegerField()
+    home = forms.IntegerField()
 
 
 class Nuevxs_Lectorxs(forms.Form):

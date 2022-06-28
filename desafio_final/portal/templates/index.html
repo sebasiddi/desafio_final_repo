@@ -19,7 +19,7 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="/media/{{noticia1.img}}" class="d-block w-100" alt="...">
+          <img src="/media/{{noticia1.img}}" class="d-block w-100" class="opacity-75" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <a href="{% url 'lectura' noticia1.id %}"><h5 class="text-white bg-dark">{{noticia1.titulo}}</h5></a>
             <p class="text-white bg-dark">{{noticia1.bajada}}</p>
@@ -57,55 +57,54 @@
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         {% for n in noticias %}
-        {% if n.home == True and n.publicado == True %}
-        <h2 class="accordion-header" id="flush-headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
-            {% if n.seccion == "politica" %}
-              {% with secc="POLÍTICA" %}
-              <span class="badge bg-secondary">{{secc}}</span>
-              {% endwith %}
-            {% elif n.seccion == "economia" %}
-              {% with secc="ECONOMÍA" %}
-              <span class="badge bg-secondary">{{secc}}</span>
-              {% endwith %}
-            {% elif n.seccion == "sociedad" %}
-              {% with secc="SOCIEDAD" %}
-              <span class="badge bg-secondary">{{secc}}</span>
-              {% endwith %}
-            {% elif n.seccion == "deportes" %}
-              {% with secc="DEPORTES" %}
-              <span class="badge bg-secondary">{{secc}}</span>
-              {% endwith %}
-            {% endif %}
-            | {{n.titulo}} | {{n.fecha}}
-          </button>
-        </h2>
-        <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            <div>
-              <a href="{% url 'lectura' n.id %}">
-              <table>
-                
-                <td><img src="/media/{{n.img}}" alt="imagen de {{n.titulo}}" height="50" width="90"></td>
-                <td>{{n.bajada}}</td>
-              </table>
-            </div>
-            <br>
-            <button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
-            {% if request.user.is_authenticated %}
-            {% if user.id == n.id_user %}
-            <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary"></i> Editar</button></a>
-            <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Borrar</a>
-            <div class="collapse" id="collapseExample">
-              <div class="card card-body">
-                ¿Borrar definitivamente?<a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> Si</button></a>
+          {% if n.home == True and n.publicado == True %}
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
+                {% if n.seccion == "politica" %}
+                  {% with secc="POLÍTICA" %}
+                    <span class="badge bg-primary" >{{secc}}</span>
+                  {% endwith %}
+                {% elif n.seccion == "economia" %}
+                  {% with secc="ECONOMÍA" %}
+                    <span class="badge bg-success">{{secc}}</span>
+                  {% endwith %}
+                {% elif n.seccion == "sociedad" %}
+                  {% with secc="SOCIEDAD" %}
+                    <span class="badge bg-warning">{{secc}}</span>
+                  {% endwith %}
+                {% elif n.seccion == "deportes" %}
+                  {% with secc="DEPORTES" %}
+                    <span class="badge bg-danger">{{secc}}</span>
+                  {% endwith %}
+                {% endif %}
+                | {{n.titulo}} | {{n.fecha}}
+              </button>
+            </h2>
+          <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <div>
+                <a href="{% url 'lectura' n.id %}">
+                <table>
+                  <td><img src="/media/{{n.img}}" alt="imagen de {{n.titulo}}" height="50" width="90"></td>
+                  <td>{{n.bajada}}</td>
+                </table>
+              </div>
+              <br>
+              <button type="button" class="btn btn-success"> <i class="fa-solid fa-newspaper"></i> Ir a la publicación</button></a>
+                {% if request.user.is_authenticated %}
+                  {% if user.id == n.id_user %}
+                    <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary"></i> Editar</button></a>
+                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Borrar</a>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body">
+                        ¿Borrar definitivamente?<a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> Si</button></a>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endif %}
               </div>
             </div>
-            {% endif %}
-            {% endif %}
-          </div>
-        </div>
-        {% endif %} 
+          {% endif %} 
         {% endfor %}
       </div>
     </div>
@@ -115,21 +114,4 @@
 
 
 
-{% endblock %}    
-
-
-<!--
-
-    {% for n in noticias %}
-      {% if n.home %}
-        <h2><a href="{{n.seccion}}">{{n.seccion}} &raquo;</a></h2>
-        <p><strong><a href="{% url 'lectura'  %}">{{n.titulo}}</a></strong></p>  -->
-        <!-- <p><strong><a href="inicio"></a>{{n.titulo}}</a></strong></p> -->
-  <!--     <p>{{n.bajada}}</p>
-        <a href="{% url 'editar_publicacion' n.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
-        <a href="{% url 'borrar_publicacion' n.id %}"><button type="button" class="btn btn-danger">Borrar</button></a>
-      {% endif %}
-    
-    {% endfor %}
-
-  -->
+{% endblock %}

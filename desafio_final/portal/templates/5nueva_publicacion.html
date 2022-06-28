@@ -74,7 +74,7 @@ function countCharsCuerpo(obj){
         
         </div>
         <br>
-         <!-- NOMBRE Y MAIL DE REDACTORXS -->
+         <!-- NOMBRE Y MAIL DE USUARIXS -->
         
         <div class="mb-3">
             <label for="id_nombre_user" class="form-label">Nombre</label>
@@ -91,27 +91,16 @@ function countCharsCuerpo(obj){
 
         <!-- SELECTORES BOOLEANOS de publicar y home -->
 
-        <form class="row g-3">
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="id_publicado" class="form-label">Publicado</label>
-                    <select class="form-control" v-model="allowMultiple" name="publicado" id="id_publicado">
-                        <option v-bind:value="true">Si</option>
-                        <option v-bind:value="false">No</option>
-                    </select>
-                </div>
-            </div>
-        <br>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="id_home" class="form-label">Home</label>
-                    <select class="form-control" v-model="allowMultiple" name="home" id="id_home">
-                        <option v-bind:value="true">Si</option>
-                        <option v-bind:value="false">No</option>
-                    </select>
-                </div>
-            </div>
-        <br>
+        <label for="selector-seccion" class="form-label">Publicado</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="publicado" id="selector-seccion" required>
+            <option value=1 selected>Si</option>
+            <option value=0>No</option>
+        </select>
+        <label for="selector-seccion" class="form-label">Publicar en inicio</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="home" id="selector-seccion" required>
+            <option value=1>Si</option>
+            <option value=0 selected>No</option>
+        </select>
         <button type="submit" class="btn btn-primary">Publicar</button>
         </form>
     </div>
@@ -119,26 +108,5 @@ function countCharsCuerpo(obj){
 
 
 
- <!--  RESOLVER BOOLEANO
-     
-    Publicado
-    <select name="publicado" required>
-        <option value=True selected>Si</option>
-        <option value=False>No</option>
-    </select>
-    <br>
-    Poner en Home
-    <select name="Home" required>
-        <option value=True selected>Si</option>
-        <option value=False>No</option>
-    </select>
-    <br>
- 
 
-    Publicado
-    <input type="checkbox" name="publicado" id="publicado">
-    Poner en Home
-    <input type="checkbox" name="home" id="home">
-
--->
 {% endblock %}

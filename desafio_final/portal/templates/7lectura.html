@@ -6,7 +6,7 @@
 
 <div class="wrapper">
   <div id="hpage_cats">
-    {% for n in noticias %}
+    {% for n in noticia_lectura %}
       {% if n.publicado %}
         <p>
           <strong>
@@ -15,8 +15,8 @@
             </div>
           </strong>
         </p>
-        <p>{{n.bajada}}</p>
-        <p>{{n.cuerpo}}</p>
+        <p align="justify">{{n.bajada}}</p>
+        <p align="justify">{{n.cuerpo}}</p>
         <img src="/media/{{n.img}}" alt="imagen de {{n.titulo}}" height="500" width="900">
         <p></p>
         <p>Sección: 

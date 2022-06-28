@@ -4,32 +4,31 @@
 
 {% block contenido %}
 <div class="wrapper">
-    <div id="hpage_cats">
-        <h1>Mensajes</h1>
-        <form action="nuevo_mensaje" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-        
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Enviar a</label>
-                    <select class="form-select" id="inputGroupSelect01" name="id_recibe">
-                      <option selected>Seleccionar usuario</option>
-                      {% for u in users %}
-                        <option value="{{u.user_id}}" >{{u.user}} <img SRC= "{{url}}" alt="foto de perfil"  width="40" height="30"></option>
-                        {% endfor %}
-                     
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Título</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="titulo_mensaje">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo_mensaje"></textarea>
-                  </div>
-
-                <input type="submit" value="enviar">
-        </form>
-    </div>
+  <div id="hpage_cats">
+    <h1>Mensajes</h1>
+      <form action="nuevo_mensaje" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        <!-- Selector de usuario receptor del mensaje-->
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Enviar a</label>
+            <select class="form-select" id="inputGroupSelect01" name="id_recibe" aria-placeholder="Seleccionar usuarix">
+              {% for u in users %}
+                <option value="{{u.id}}" >{{u.username}} <img SRC= "{{url}}" alt="foto de perfil"  width="40" height="30"></option>
+              {% endfor %}
+            </select>
+        </div>
+        <!-- Título del mensaje-->
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Título</label>
+           <input type="text" class="form-control" id="exampleFormControlInput1" name="titulo_mensaje">
+        </div>
+        <!-- Cuerpo del mensaje -->
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo_mensaje"></textarea>
+        </div>
+        <input type="submit" value="enviar">
+      </form>
+  </div>
 </div>
 {% endblock %}   

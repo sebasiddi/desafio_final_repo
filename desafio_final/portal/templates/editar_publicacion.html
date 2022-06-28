@@ -20,113 +20,93 @@ function countCharsCuerpo(obj){
 <div class="wrapper">
     <div id="hpage_cats">
         <h1>Editar publicación</h1>
-    
-    <form action="{% url 'editar_publicacion' noticia_para_editar.id %}" method="POST" enctype="multipart/form-data">
-       
+        <form action="{% url 'editar_publicacion' noticia_para_editar.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-    <select name="seccion" required>
-        {% if noticia_para_editar.seccion == "politica" %}
-            <option value="politica" selected>Política</option>
-            <option value="economia">Economía</option>
-            <option value="sociedad">Sociedad</option>
-            <option value="deportes">Deportes</option>
-        {% elif noticia_para_editar.seccion == "economia" %}
-            <option value="politica">Política</option>
-            <option value="economia" selected>Economía</option>
-            <option value="sociedad">Sociedad</option>
-            <option value="deportes">Deportes</option>
-        {% elif noticia_para_editar.seccion == "sociedad" %}
-            <option value="politica">Política</option>
-            <option value="economia">Economía</option>
-            <option value="sociedad">Sociedad</option>
-            <option value="deportes">Deportes</option>
-        {% elif noticia_para_editar.seccion == "deportes" %}
-            <option value="politica">Política</option>
-            <option value="economia">Economía</option>
-            <option value="sociedad">Sociedad</option>
-            <option value="deportes" selected>Deportes</option>
-        {% endif %}
-
-      </select>
-    <br>
-    <br>
-    <h3>Título</h3>
-    
-    <td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" name="titulo" onkeyup="countChars(this);" value="{{ formulario_publicacion.titulo.value }}" required></td>
-    <!--<td><input type="text" class="form-control" size="140" id="exampleFormControlInput1" placeholder="Título hasta 140 caractéres" name="titulo" onkeyup="countChars(this);" required></td>-->
-    <td><h5 id="charNum">0 caractéres</h5> </td>
-    <br>
-    <h3>Bajada</h3>
-    <br>
-    <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsBajada(this);" required>  {{ formulario_publicacion.bajada.value }} </textarea>
-    <td><h5 id="charNum2">0 caractéres</h5> </td>
-    <br>
-    <br>
-    <h3>Cuerpo de la noticia</h3>
-    <textarea class="form-control" name="cuerpo" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsCuerpo(this);" required>  {{ formulario_publicacion.cuerpo.value }} </textarea>
-    <td><h5 id="charNum3">0 caractéres</h5> </td>
-    <br>
-    <br>
-    <br>
-    <div class="mb-3">
-        <input class="form-control" type="file" placeholder="imagen" aria-label="default input example" name="img" id="id_img" required>
-    
+            <select name="seccion" required>
+                {% if noticia_para_editar.seccion == "politica" %}
+                    <option value="politica" selected>Política</option>
+                    <option value="economia">Economía</option>
+                    <option value="sociedad">Sociedad</option>
+                    <option value="deportes">Deportes</option>
+                {% elif noticia_para_editar.seccion == "economia" %}
+                    <option value="politica">Política</option>
+                    <option value="economia" selected>Economía</option>
+                    <option value="sociedad">Sociedad</option>
+                    <option value="deportes">Deportes</option>
+                {% elif noticia_para_editar.seccion == "sociedad" %}
+                    <option value="politica">Política</option>
+                    <option value="economia">Economía</option>
+                    <option value="sociedad">Sociedad</option>
+                    <option value="deportes">Deportes</option>
+                {% elif noticia_para_editar.seccion == "deportes" %}
+                    <option value="politica">Política</option>
+                    <option value="economia">Economía</option>
+                    <option value="sociedad">Sociedad</option>
+                    <option value="deportes" selected>Deportes</option>
+                {% endif %}
+            </select>
+            <br>
+            <br>
+            <h3>Título</h3>
+            <td>
+                <input type="text" class="form-control" size="140" id="exampleFormControlInput1" name="titulo" onkeyup="countChars(this);" value="{{ formulario_publicacion.titulo.value }}" required></td>
+            <td>
+                <h5 id="charNum">0 caractéres</h5>
+            </td>
+            <br>
+            <h3>Bajada</h3>
+            <br>
+            <textarea class="form-control" name="bajada" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsBajada(this);" required>
+                {{ formulario_publicacion.bajada.value }}
+            </textarea>
+            <td>
+                <h5 id="charNum2">0 caractéres</h5>
+            </td>
+            <br>
+            <br>
+            <h3>Cuerpo de la noticia</h3>
+                <textarea class="form-control" name="cuerpo" id="exampleFormControlTextarea1" rows="6" cols="140" onkeyup="countCharsCuerpo(this);" required>
+                    {{ formulario_publicacion.cuerpo.value }}
+                </textarea>
+            <td>
+                <h5 id="charNum3">0 caractéres</h5>
+            </td>
+            <br>
+            <br>
+            <br>
+            <div class="mb-3">
+                <input class="form-control" type="file" placeholder="imagen" aria-label="default input example" name="img" id="id_img" required>
+            </div>
+            <br>     
+            <!-- Nombre y ID de usuarix -->
+            <div class="mb-3">
+                <label for="id_nombre_user" class="form-label">Nombre</label>
+                <td>
+                    <input type="text" class="form-control" size="140" id="id_nombre_user" value="{{user.username}}" name="nombre_user" readonly >
+                </td>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="id_id_user" class="form-label">ID de Usuario</label>
+                <td>
+                    <input type="number" class="form-control" size="140" id="id_id_user" value={{user.id}} name="id_user" readonly >
+                </td>
+            </div>
+            <br>
+            <label for="selector-seccion" class="form-label">Publicado</label>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="publicado" id="selector-seccion" required>
+                <option value=1 selected>Si</option>
+                <option value=0>No</option>
+            </select>
+            <label for="selector-seccion" class="form-label">Publicar en inicio</label>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="home" id="selector-seccion" required>
+                <option value=1 selected>Si</option>
+                <option value=0>No</option>
+            </select>           
+            <input type="submit" value="Enviar">
+            <a href="{% url 'inicio' %}"><input type="button" value="Cancelar"></a>
+        </form>
     </div>
-    <br>     
-      <!-- NOMBRE Y MAIL DE REDACTORXS -->
-        
-      <div class="mb-3">
-        <label for="id_nombre_user" class="form-label">Nombre</label>
-        <td><input type="text" class="form-control" size="140" id="id_nombre_user" value="{{user.username}}" name="nombre_user" readonly ></td>
-        
-    </div>
-    <br>
-    <div class="mb-3">
-        <label for="id_id_user" class="form-label">ID de Usuario</label>
-        <td><input type="number" class="form-control" size="140" id="id_id_user" value={{user.id}} name="id_user" readonly ></td>
-        
-    </div>
-    <br>
-<!--    Publicado
-    <select name="publicado" required>
-        <option value=True selected>Si</option>
-        <option value=False>No</option>
-    </select>
-    <br>
-    Poner en Home
-    <select name="Home" required>
-        <option value=True selected>Si</option>
-        <option value=False>No</option>
-    </select>
-    <br>
- 
-
-    Publicado
-    <input type="checkbox" name="publicado" id="publicado">
-    Poner en Home
-    <input type="checkbox" name="home" id="home">
-
--->
-   
-    <div class="form-group">
-        <label for="">Publicado</label>
-        <select class="form-control" v-model="allowMultiple" name="publicado">
-            <option v-bind:value="true">Si</option>
-            <option v-bind:value="false">No</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="">Poner en home</label>
-        <select class="form-control" v-model="allowMultiple" name="home">
-            <option v-bind:value="true">Si</option>
-            <option v-bind:value="false">No</option>
-        </select>
-    </div>
-    
-    <input type="submit" value="Enviar">
-    <a href="{% url 'inicio' %}"><input type="button" value="Cancelar"></a>
-</form>
-</div>
 </div>
 
 {% endblock %}

@@ -3,9 +3,8 @@ from datetime import datetime
 from time import timezone
 from turtle import home
 from django.shortcuts import render
-from portal.forms import Nueva_noticia, Nuevxs_Lectorxs, Nuevxs_Periodistxs, User_Edit_Form
-from django.http import HttpResponse
-from portal.models import Noticia, Lectorxs, Periodistxs, Avatar
+from portal.forms import Nueva_noticia, User_Edit_Form
+from portal.models import Noticia, Avatar
 from django.template import loader
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,authenticate, logout
@@ -14,14 +13,18 @@ from datetime import datetime
 # Create your views here.
 
 #Función que carga en un diccionario la DB para mostrar en diferentes páginas del sitio
-#Se carga la lista de noticias completa, la lista de noticias que va a la marquesina de "Últimos Títulos"
+#Se carga la lista de noticias completa, la lista de noticias que va a la marquesina de "Últimos Títulos" y la lista que va al carousel
 #y los datos y avatar de quien se haya loggeado, la llamo para enviar el diccionario generado en cada return
 def dicc(request):
     noticias= Noticia.objects.all()
     noticias_titulos=noticias[::-1]
-    n1 = noticias_titulos[0]
-    n2 = noticias_titulos[1]
-    n3 = noticias_titulos[2]
+    noticias_home=[]
+    for n in noticias_titulos:
+        if n.home == 1:
+            noticias_home.append(n)
+    n1 = noticias_home[0]
+    n2 = noticias_home[1]
+    n3 = noticias_home[2]
     avatares = Avatar.objects.filter(user=request.user.id)
     if avatares.exists():
         return ({"noticias":noticias[::-1], "noticias_titulos":noticias_titulos[0:5],"noticia1":n1,"noticia2":n2,"noticia3":n3,"url":avatares[0].imagen.url})
@@ -67,10 +70,13 @@ def deportes(request):
 @login_required
 def nueva_publicacion(request):
     if request.method == "POST":
+
         data_posteo = Nueva_noticia(request.POST,request.FILES)
+        print(data_posteo)
         if data_posteo.is_valid():
             datos=data_posteo.cleaned_data
             #chequeo de cómo llega la información boolean desde el form
+            print(datos["publicado"])
             posteo = Noticia(seccion=datos['seccion'] ,
                             titulo = datos['titulo'],
                             bajada = datos['bajada'],
@@ -108,12 +114,11 @@ def resultados(request):
 
 #Lectura de noticias mediante link en título
 def lectura(request,id):
-    noticias = Noticia.objects.filter(id__exact = id)
+    noticia_lectura = Noticia.objects.filter(id__exact = id)
     avatares = Avatar.objects.filter(user=request.user.id)
-    if avatares.exists():
-        return render(request, "7lectura.html",{"noticias":noticias[::-1], "url":avatares[0].imagen.url})
-    else:
-        return render(request, "7lectura.html",{"noticias":noticias[::-1]})
+    data = dicc(request)
+    data.update({"noticia_lectura":noticia_lectura})
+    return render(request, "7lectura.html",data)
 
  
 #Borrar publicaciones

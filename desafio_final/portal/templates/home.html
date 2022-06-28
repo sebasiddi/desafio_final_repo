@@ -64,7 +64,11 @@
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0">Agencia de noticias</h1>
 	                        <p class="hero-paragraph">Bienvenidxs al sitio de noticias menos visitado del mundo.</p>
+							{% if not request.user.is_authenticated %}
 	                        <div class="hero-cta"><a class="button button-shadow" href="{% url 'inicio' %}">Leer títulos</a><a class="button button-primary button-shadow" href="{% url 'Login' %}">Iniciar Sesión</a></div>
+							{% else %}
+							<div class="hero-cta"><a class="button button-shadow" href="{% url 'inicio' %}">Leer títulos</a><a class="button button-primary button-shadow" href="{% url 'editar_perfil' %}">Editar Perfil</a></div>
+							{% endif %}
 							<br>
 
 

@@ -5,26 +5,21 @@
 {% block contenido %}
 
 <div class="wrapper">
-    <div id="hpage_cats">
-        <br>
-        <h1>
-        
-        <!--<img src="{% static 'portal/layout/images/descarga.png' %}" alt="" height="400" width="400" >-->
-        <div class="card bg-dark text-white">
-            <img src="{% static 'portal/layout/images/descarga.png' %}" class="card-img" alt="...">
-            <div class="card-img-overlay">
-              <h5 class="card-title">Acerca de</h5>
-              <p class="card-text">
-                
-                
-                
-                Contar con algún acceso visible a la vista de "Acerca de mí" donde se contará acerca de los dueños de la página manejado en el route about/.  (En castellano un “acerca de mí” que hable un poco de los creadores de la web y del proyecto
-                
-                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text">Last updated 3 mins ago</p>
-            </div>
-          </div>
+  <div id="hpage_cats">
+    <br>
+    <h1>
+      <div class="card bg-dark text-white">
+        <img src="{% static 'portal/layout/images/descarga.png' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <h5 class="text-white bg-dark">Acerca de</h5>
+          <p class="text-dark bg-white" align="justify">
+            Soy Sebastián Siddi, licenciado en comunicación audiovisual y trabajo en una agencia de noticias desde hace mas de 11 años por eso elegí para este proyecto emular un sitio similar al de una cablera de noticias.
+            En la agencia me desempeño como jefe de editores de sonido ya que también soy operador técnico de radio 
+
+            En este proyecto solo se trabaja con carga de información en formato texto y fotografía separada por secciones. Para el caso de la entrega del trabajo final cualquier visitante puede registrarse y generar nuevo contenido.
+        </div>
+      </div>
     </h1>
-    </div>
+  </div>
 </div>
 {% endblock %}

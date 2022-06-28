@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 #Página de inicio de Mensajes, lista todos los mensajes recibidos
 def inbox(request):
     data_mensajes = Mensaje.objects.all()
-    avatares = Avatar.objects.all()
+    avatares = User.objects.all()
     data = {"users":avatares,"mensajes":data_mensajes[::-1]}
     data.update(dicc(request))
     return render(request,"mensajesportal.html",data)
@@ -21,23 +21,22 @@ def inbox(request):
 def nuevo_mensaje(request):
     if request.method == "POST":
         data_mensaje = Nuevo_mensaje(request.POST)
-
         if data_mensaje.is_valid():
             datos = data_mensaje.cleaned_data
-            user = Avatar.objects.filter(user=request.user.id)
             mensaje = Mensaje(
-                        id_envia = user[0].user_id,
+                        id_envia = request.user.id,
                         id_recibe = datos["id_recibe"],
                         titulo_mensaje = datos["titulo_mensaje"],
                         cuerpo_mensaje = datos["cuerpo_mensaje"],
                         fecha_mensaje = datetime.now())
             mensaje.save()
-            avatares = Avatar.objects.all()
-            data = {"users":avatares}
+            avatares = User.objects.all()
+            data_mensajes = Mensaje.objects.all()
+            data = {"users":avatares,"mensajes":data_mensajes[::-1]}
             data.update(dicc(request))
             return render(request,"mensajesportal.html",data)
     else:
-        avatares = Avatar.objects.all()
+        avatares = User.objects.all()
         data = {"users":avatares}
         data.update(dicc(request))
         return render(request,"nuevo_mensaje.html",data)     
