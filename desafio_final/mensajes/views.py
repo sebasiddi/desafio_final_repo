@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+
+#Página de inicio de Mensajes, lista todos los mensajes recibidos
 def inbox(request):
     data_mensajes = Mensaje.objects.all()
     avatares = Avatar.objects.all()
@@ -22,10 +24,7 @@ def nuevo_mensaje(request):
 
         if data_mensaje.is_valid():
             datos = data_mensaje.cleaned_data
-           
             user = Avatar.objects.filter(user=request.user.id)
-
-
             mensaje = Mensaje(
                         id_envia = user[0].user_id,
                         id_recibe = datos["id_recibe"],

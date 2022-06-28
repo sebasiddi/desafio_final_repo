@@ -35,10 +35,6 @@ Licence URI: http://www.os-templates.com/template-terms
     {% endif %}
     <ul>
       <li><a href="{% url 'nueva_publicacion' %}">Crear nueva publicación</a></li>
-      <!--
-      <li><a href="{% url 'formulario_lectorxs' %}">Registrarse como lectorxs</a></li>
-      <li><a href="{% url 'formulario_periodistxs' %}">Registrarse como periodistxs</a></li>
-      -->
       
       {% if not request.user.is_authenticated %}
         <li><a href="{% url 'Login' %}">Iniciar sesión</a></li>

@@ -12,7 +12,7 @@
     <h5>Publicaciones hechas por {{user.username}}</h5>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
-        {% for n in noticias %}
+        {% for n in mis_noticias %}
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOn{{n.id}}" aria-expanded="false" aria-controls="flush-collapseOn{{n.id}}">
             {% if n.seccion == "politica" %}
