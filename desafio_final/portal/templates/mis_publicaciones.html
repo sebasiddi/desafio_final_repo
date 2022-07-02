@@ -31,7 +31,7 @@
                   <span class="badge bg-secondary">{{secc}}</span>
                 {% endwith %}
               {% endif %}
-              | {{n.titulo}} | {{n.fecha}}
+              | {{n.titulo}} | {{n.fecha}} | {% if n.publicado %}<span class="badge bg-danger">Publicado: SI </span>{% else %}<span class="badge bg-secondary">Publicado:  NO</span>{% endif %}
             </button>
           </h2>
           <div id="flush-collapseOn{{n.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">

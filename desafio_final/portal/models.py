@@ -22,6 +22,19 @@ class Noticia(models.Model):
             return f"ID: {self.id} | Sección: {self.seccion} - Título: {self.titulo}"
 
 
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True ,blank=True )
+
+    def __str__(self) -> str:
+          return f"ID: {self.id}, User: {self.user}"
+          
+class Imagen_post(models.Model):
+    id_post = models.IntegerField()
+    imagen = models.ImageField(upload_to='img', null=True ,blank=True )
+
+    
+
 class Lectorxs(models.Model):
     nombre_lectorxs = models.CharField(max_length=50)
     pass_lectorxs = models.CharField(max_length=50)
@@ -43,14 +56,3 @@ class Periodistxs(models.Model):
 
     def __str__(self):
             return f"ID: {self.id} - Nombre: {self.nombre_periodistxs}, E-mail: {self.email_periodistxs}"
-
-class Avatar(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='avatares', null=True ,blank=True )
-
-    def __str__(self) -> str:
-          return f"ID: {self.id}, User: {self.user}"
-          
-class Imagen_post(models.Model):
-    id_post = models.IntegerField()
-    imagen = models.ImageField(upload_to='img', null=True ,blank=True )

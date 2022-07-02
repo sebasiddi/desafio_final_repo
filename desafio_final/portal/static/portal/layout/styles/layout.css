@@ -14,7 +14,7 @@ File: Layout CSS
 @import url("featured_slide.css");
 
 html{overflow-y:scroll;}
-body{margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color:#666666; background-color:#FFFFFF;}
+body{margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color:#666666; background-color:#ffffff;}
 
 .justify{text-align:justify;}
 .bold{font-weight:bold;}
@@ -39,8 +39,8 @@ img{display:block; margin:0; padding:0; border:none;}
 
 div.wrapper{display:block; width:100%; margin:0; text-align:left; border-bottom:1px solid #88c8fd;}
 div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{margin:0 0 15px 0; padding:0; font-size:22px; font-weight:normal; line-height:normal;}
-.col0, .col0 a{color:#FFFFFF; background-color:#2b728f;}
-.col2{color:#FFFFFF; background-color:#90d1fd;}
+.col0, .col0 a{color:#ffffff; background-color:#2b728f;}
+.col2{color:#000000; background-color:#90d1fd;}
 
 /* ----------------------------------------------Generalise------------------------------------- */
 

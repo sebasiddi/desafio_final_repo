@@ -13,7 +13,7 @@ File: Navigation CSS
 #topnav li a:link, #topnav li a:visited, #topnav li a:hover{display:block; margin:0 35px 0 0; padding:0; font-size:14px; text-transform:uppercase; color:#059BD8; background-color:#F6F6F6;}
 #topnav ul ul li a:link, #topnav ul ul li a:visited{border:none;}
 #topnav li.last a{margin-right:0;}
-#topnav li a:hover, #topnav ul li.active a{color:#666666; background-color:#F6F6F6;}
+#topnav li a:hover, #topnav ul li.active a{color:#666666; background-color:#88c8fd;}
 #topnav li li a:link, #topnav li li a:visited{width:150px; float:none; margin:0; padding:7px 10px; font-size:12px; font-weight:normal; color:#059BD8; background-color:#F6F6F6;}
 #topnav li li a:hover{color:#FFFFFF; background-color:#059BD8;}
 #topnav li ul{z-index:9999; position:absolute; left:-999em; height:auto; width:170px; border-left:1px solid #059BD8; border-bottom:1px solid #059BD8;}

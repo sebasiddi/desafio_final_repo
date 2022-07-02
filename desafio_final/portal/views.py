@@ -36,8 +36,11 @@ def home(request):
     return render(request, "home.html",dicc(request))
 
 #Página de inicio
-def inicio(request):
-    return render(request, "index.html",dicc(request))
+def inicio(request,*kwargs):
+    data=dicc(request) 
+    if kwargs:
+        data.update(kwargs[0])
+    return render(request, "index.html",data)
     
 @login_required
 #Muestro las publicaciones hechas por quien se haya loggeado
@@ -198,12 +201,11 @@ def register(request):
             form = AuthenticationForm()
             data=dicc(request)
             data.update({'mensaje':'Registro Exitoso','form':form})  
-            request.method = "GET"
-            return render(request,"login.html",data)
+            return render(request,"index.html",data)
     else:
         form = UserCreationForm()
     data=dicc(request)
-    data.update({"form":form})
+    data.update({"form":form,"mensaje":"Error en el registro"})
     return render (request, "registro.html",data)
 
 
@@ -219,7 +221,8 @@ def editar_perfil(request):
                 password = informacion['password1']
                 usuario.set_password(password)
                 usuario.save()
-                return render(request, "index.html",dicc(request))
+                return inicio(request,{"mensaje":"Contraseña cambiada exitosamente, por favor vuela a loggearse"})
+                
     else:
         miFormulario = User_Edit_Form ( initial = {'email':usuario.email} )
         
