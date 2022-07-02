@@ -1,37 +1,42 @@
 # desafio_final_repo
+Este trabajo final fue desarrollado completamente por Sebastian Siddi a excepción de la plantilla descargada para contener el sitio.
+De todos modos también se modificaron algunos detalles de CSS y se utilizó también herramientas de Bootstrap para el front.
 
-Este proyecto emula una cablera de una agencia de noticias en donde se accede desde http://127.0.0.1:8000/portal/ al index del sitio.
+Para este proyecto final trabajé sobre la pre-entrega en donde presenté un sitio que emula una cablera de una agencia de noticias.
 
-En el header está el menú que es bastante intuitivo, muestra las secciones en las que se organiza y despliega el contenido.
-También está el buscador que permite encontrar noticias buscándo los términos tanto en los títulos como en las bajadas.
-Además en el header está el acceso al formulario para la creación de nuevas publicaciones (noticias), nuevxs lectorxs y nuevxs periodistxs.
-En el estadío actual del desarrollo ese acceso está visible para todo el mundo.
+Si bien en una agencia de noticias quienes acceden al sitio no tienen la posibilidad de registrarte y generar contenido, en este caso sí es posible en función de cumplir con las consignas de esta entrega final lo que lo hace tener un funcionamiento similar al de un blog.
 
-El formulario de carga de nuevas publicaciones exige el ingreso de todos los campos que están dispuestos en models.py: seccion, titulo, bajada,
-nombre de quien escribe la noticia (todos estos anteriores son de texto/CharField), el correo electrónico del/la periodista (EmailField) y dos
-campos mas que permiten decidir si el material se envía directo a su publicación y si además se envían al home del sitio o solo a su sección
-correspondiente, en estos casos los datos son Booleans (la funcionalidad de estos campos booleanos falla porque falta apuntalar el código HTML
-para que envíe los valores correspondientes según si está o no selecionado).
+Hay en el código y en la DB contenido que es obsoleto heredado de la entrega anterior pero que decidí deliveradamente no elminiar para el caso de querer continuarlo en un futuro. Nada de eso está accesible al usuario.
 
-Además existen los formularios de carga de Lectorxs o de Periodistxs.
+En cuanto al sitio presentado, en el header heredado está el menú que es bastante intuitivo, muestra las secciones en las que se organiza y despliega el contenido además de las opciones de registro, loggeo, etc.
+También está el buscador que permite encontrar noticias buscándo los términos tanto en los títulos como en las bajadas y cuerpo de las noticias.
+
+El formulario de carga de nuevas publicaciones exige el ingreso de algunos de los campos que están dispuestos en models.py: seccion, titulo, bajada/copete, cuerpo de la noticia e imagen ilustrativa. Ademas hay dos campos que permiten decidir si el material se envía directo a su publicación y si además se envían al home del sitio o solo a su sección. Otros de los campos del modelo se completan automáticamente desde el código, como por ejemplo la fecha de creación de las publicaciones.
 
 En cuanto a las consignas:
 
-1- Herencia de HTML es el archivo padre.html que contiene el header, nav y footer
+-El sitio tiene un home de bienvenida a lxs usuarixs en el que se puede elegir acceder a las noticias (página de inicio) o al loggeo directamente (en caso de estar ya loggeado envía a la edición de perfil)
 
-2- Las 3 Clases con sus respectivos Models son Noticias, Lectorxs y Periodistxs con sus respectivos Forms para la carga de los datos Nueva_noticia,
-Nuevxs_Lectorxs y Nuevxs_Periodistxs
+-En el inicio del portal de noticias se despliega la lista de entradas en general (a excepción de las que deliveradamente no se hayan enviado a publicar al home al momento de crearlas o editarlas.)
 
-3- Como estaba descripto al incio, el acceso a cada formulario para carga de noticias, lectorxs o periodistxs está en en el menú superior
-Link directo a nueva publicación
-http://127.0.0.1:8000/portal/nueva_publicacion
+-Cada usuario registrado tiene la posibilidad de crear contenido, también puede editar solo sus propias publicaciones, para ayudar a eso en el menú superior está la opción de ver "Mis publicaciones" y allí se listan solo las que haya creado cada usuario
 
-Link directo a nuevxs usuarixs
-http://127.0.0.1:8000/portal/formulario_lectorxs
+-desde http://127.0.0.1:8000/ se accede directamente al home
 
-Link directo a nuevxs periodistxs
-http://127.0.0.1:8000/portal/formulario_periodistxs
+-Tanto en inicio como en las diferentes secciones se puede acceder a una vista previa de la noticia en donde de muestra el título, bajada y la foto en un tamaño pequeño
 
-4- El formulario de búsqueda está también en el menú de navegación por ende se muestra en todo el portal.
-02/Jun/2020
+-para el registro de usuarixs utilicé lo visto en clase, se genera un nombre de usuario y contraseña, luego en editar perfil se puede agregar y/o modificar una cuenta de e-mail, también se puede cambiar el avatar que se asigna por defecto.
+
+-el usuario admin es superuser y su password es codercoder
+
+-se creó una app de menasajes que administra la mensajería interna entre usuarixs con bandeja de entrada y bandeja de mensajes enviados.
+
+Video de captura del sitio funcionando
+
+[![Alt text](https://img.youtube.com/vi/1JpqgLZHccw/0.jpg)](https://www.youtube.com/watch?v=1JpqgLZHccw)
+
+
+01/Jul/2020
+
+
 
