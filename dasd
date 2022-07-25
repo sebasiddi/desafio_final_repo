@@ -1,0 +1,115 @@
+[33mcommit 6aa68197099435c8b0e546b4b8b8bb4474753c50[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Mon Jul 25 12:32:40 2022 -0300
+
+    listos
+
+[33mcommit 4fb03e09a65c61eb39c05ac4495c8eb73908ba86[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Fri Jul 1 21:54:56 2022 -0300
+
+    Trabajo terminado
+
+[33mcommit 2374a83f9b5421a97ef32469094b965c804695a0[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Tue Jun 28 19:39:51 2022 -0300
+
+    Version ordenada y con todo funcionando
+
+[33mcommit a537f547bb9658d27067cecae92b2559881199e2[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Mon Jun 27 23:47:28 2022 -0300
+
+    versión código organizado, aun falta readme
+
+[33mcommit 50d01623856b672c427ac00d1effcbf061583d69[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Sat Jun 25 23:29:22 2022 -0300
+
+    Mensajes y modificación de avatares funcionando, falta limpiar código
+
+[33mcommit 066450ef9b6b3760b84baa79b3d6b42bad20c89e[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Tue Jun 21 15:20:49 2022 -0300
+
+    Fotos, fecha y edición por autorxs funcionando
+
+[33mcommit 669e985bc1288c770b2d748792bc628d8b349d06[m
+Merge: d13a500 09e683a
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Thu Jun 16 07:00:08 2022 -0300
+
+    Merge branch 'main' of https://github.com/sebasiddi/desafio_final_repo
+
+[33mcommit d13a500a225c03ea2d10e5e338438f95a70e172f[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Thu Jun 16 06:58:36 2022 -0300
+
+    Actualización con home antes de modificar DB
+
+[33mcommit d30c0d8d8046fa1dd2244f737a02b7d9281ba2ce[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Thu Jun 9 00:57:24 2022 -0300
+
+    Todo funcionando, editar resuelto, login, logout y registrarse funciona
+
+[33mcommit fdb5a67f047414696d6907406b05859faca995da[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Tue Jun 7 02:59:53 2022 -0300
+
+    Falta corregir Editar, el código quedó ordenado
+
+[33mcommit a229ac1cd526a6d3c6a5cf1f88a3087b197fc505[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Mon Jun 6 21:15:37 2022 -0300
+
+    avance para la entrega final No funciona Editar
+
+[33mcommit 09e683a506488b5e4b5480804cf4b767ad628604[m
+Author: Sebastian Siddi <30435171+sebasiddi@users.noreply.github.com>
+Date:   Thu Jun 2 17:47:38 2022 -0300
+
+    Create README.md
+
+[33mcommit 6e782ef4e3ac3c2837b9845e504e9101c8c9337e[m
+Merge: 62630e3 5ee31b3
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Thu Jun 2 17:28:38 2022 -0300
+
+    Merge branch 'main' of https://github.com/sebasiddi/desafio_final_repo
+
+[33mcommit 5ee31b378b1a91abf849adb60517e885b7a22346[m
+Author: Sebastian Siddi <30435171+sebasiddi@users.noreply.github.com>
+Date:   Thu Jun 2 17:24:12 2022 -0300
+
+    Delete README.md
+
+[33mcommit ef7968c89c61d5520f92604c564ab8aef89d4971[m
+Author: Sebastian Siddi <30435171+sebasiddi@users.noreply.github.com>
+Date:   Thu Jun 2 17:15:17 2022 -0300
+
+    Update README.md
+
+[33mcommit 62630e36be908f9a2a7d852286868feee0c5ee22[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Thu Jun 2 17:06:24 2022 -0300
+
+    Primera Entrega trabajo final
+
+[33mcommit 24ae205096130fb5b7bd5661de2d141b7cf20377[m
+Author: Sebastian Siddi <30435171+sebasiddi@users.noreply.github.com>
+Date:   Wed Jun 1 09:03:08 2022 -0300
+
+    Update README.md
+
+[33mcommit 9c37969e221bf000dce467b05f93586d9030a2ee[m
+Author: Sebastian Siddi <30435171+sebasiddi@users.noreply.github.com>
+Date:   Tue May 31 22:04:39 2022 -0300
+
+    Create README.md
+
+[33mcommit 381a413a82a3558229112b7e210b71ce9f4296c2[m
+Author: Sebastian Siddi <ssiddi@gmail.com>
+Date:   Tue May 31 22:02:00 2022 -0300
+
+    primer repositorio desafio final, funciona carga de noticias sin selectores y funciona el buscador de noticias

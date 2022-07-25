@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url  
 from django.core.wsgi import get_wsgi_application  
+from whitenoise.django import DjangoWhiteNoise
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -144,5 +145,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "miSitio.settings")  
 application = get_wsgi_application()  
-from whitenoise.django import DjangoWhiteNoise  
+ 
 application = DjangoWhiteNoise(application)
