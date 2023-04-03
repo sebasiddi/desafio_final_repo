@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url  
 from django.core.wsgi import get_wsgi_application  
+from whitenoise.django import DjangoWhiteNoise  
 #from whitenoise.django import DjangoWhiteNoise
 
 
@@ -143,7 +144,10 @@ STATICFILES_DIRS = (  os.path.join(BASE_DIR, 'portal/static'),)
 
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "miSitio.settings")  
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "desafio_final.settings")  
 application = get_wsgi_application()  
  
 #application = DjangoWhiteNoise(application)
+
+
+application = DjangoWhiteNoise(application)
